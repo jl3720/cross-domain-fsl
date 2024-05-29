@@ -20,7 +20,9 @@ sys.path.append("../")
 import cross_domain_fsl.data.additional_transforms as add_transforms
 
 # from configs import *
-from config_bscdfsl_dir import *
+# from config_bscdfsl_dir import *
+ChestX_path = "/scratch_net/biwidl309/jamliu/code/datasets/chest-xrays"
+# TODO: fix structure of dataset
 
 
 class CustomDatasetFromImages(Dataset):

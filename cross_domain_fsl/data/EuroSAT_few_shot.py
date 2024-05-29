@@ -20,7 +20,8 @@ import sys
 
 sys.path.append("../")
 # from configs import *
-from config_bscdfsl_dir import *
+# from config_bscdfsl_dir import *
+EuroSAT_path = "/scratch_net/biwidl309/jamliu/code/datasets/EuroSAT/2750"
 
 identity = lambda x: x
 
