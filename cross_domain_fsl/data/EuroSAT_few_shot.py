@@ -192,7 +192,7 @@ class SimpleDataManager(DataManager):
 
 
 class SetDataManager(DataManager):
-    def __init__(self, image_size, n_way=5, n_support=5, n_query=16, n_eposide=100):
+    def __init__(self, image_size, n_way=5, n_support=5, n_query=15, n_eposide=100):
         super(SetDataManager, self).__init__()
         self.image_size = image_size
         self.n_way = n_way

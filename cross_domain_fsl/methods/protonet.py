@@ -16,6 +16,7 @@ class ProtoNet(MetaTemplate):
         return
 
     def set_forward(self, x, is_feature=False):
+        self.n_query = x.size(1) - self.n_support  # Hack to fix n_query
         z_support, z_query = self.parse_feature(x, is_feature)
         z_support = z_support.contiguous()
         z_proto = z_support.view(self.n_way, self.n_support, -1).mean(
