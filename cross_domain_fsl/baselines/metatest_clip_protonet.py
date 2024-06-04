@@ -66,21 +66,20 @@ def clip_wrapper(backbone: str = "ViT-B/32", **kwargs):
 def meta_test(model, test_dataloader):
     acc_all = []
     IS_FEATURE = False
-    # for i, (x, y) in enumerate(test_dataloader):
-    x, y = next(iter(test_dataloader))
-    x = x.to(DEVICE)
-    y = y.to(DEVICE)
+    for i, (x, y) in enumerate(test_dataloader):
+        # x, y = next(iter(test_dataloader))
+        x = x.to(DEVICE)
+        y = y.to(DEVICE)
 
-    y_query = y[:, model.n_support :].contiguous().view(-1)
-    # x_var = torch.autograd.Variable(x)
-    # 5x5 sets for testing
-    scores = model.set_forward(x, IS_FEATURE)
+        y_query = y[:, model.n_support :].contiguous().view(-1)
+        # x_var = torch.autograd.Variable(x)
+        # 5x5 sets for testing
+        scores = model.set_forward(x, IS_FEATURE)
 
-    preds = nn.functional.softmax(scores, dim=1).argmax(1)
-    print(f"Preds: {preds.shape}, y: {y.shape}, y_query: {y_query.shape}")
-    acc = torch.sum(preds == y_query) / len(y_query)
-    acc_all.append(acc)
-    print(acc_all)
+        preds = nn.functional.softmax(scores, dim=1).argmax(1)
+        acc = torch.sum(preds == y_query) / len(y_query)
+        acc_all.append(acc)
+        print(f"Batch accuracy: {acc.item()}")
 
     with torch.no_grad():
         acc_all = torch.tensor(acc_all)
