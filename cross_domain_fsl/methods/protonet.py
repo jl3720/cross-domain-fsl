@@ -44,6 +44,20 @@ class ProtoNet(MetaTemplate):
         loss = self.loss_fn(scores, y_query)
         return scores, loss
 
+    def get_feats_protos(self, x, is_feature=False):
+        """For debugging"""
+        self.n_query = x.size(1) - self.n_support  # Hack to fix n_query
+        z_support, z_query = self.parse_feature(x, is_feature)
+        z_support = z_support.contiguous()
+        z_proto = z_support.view(self.n_way, self.n_support, -1).mean(
+            1
+        )  # the shape of z is [n_data, n_dim]
+        z_query = z_query.contiguous().view(self.n_way * self.n_query, -1)
+
+        dists = euclidean_dist(z_query, z_proto)
+        scores = -dists
+        return z_support, z_query, z_proto, dists, scores
+
 
 def euclidean_dist(x, y):
     # x: N x D
