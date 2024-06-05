@@ -28,7 +28,7 @@ CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str, default="EuroSAT")
 parser.add_argument(
-    "--backbone", type=str, default="ViT-B/32", help="CLIP Vision backbone"
+    "--vision_model", type=str, default="ViT-B/32", help="CLIP Vision backbone"
 )
 parser.add_argument("--n_support", type=int, default=5)
 parser.add_argument("--n_query", type=int, default=15)
@@ -38,9 +38,9 @@ args = parser.parse_args()
 
 
 class CLIP(nn.Module):
-    def __init__(self, backbone="ViT-B/32"):
+    def __init__(self, vision_model="ViT-B/32"):
         super(CLIP, self).__init__()
-        model, preprocess = clip.load(backbone, DEVICE)
+        model, preprocess = clip.load(vision_model, DEVICE)
 
         self.transform = preprocess
 
@@ -50,7 +50,7 @@ class CLIP(nn.Module):
 
         self.model = model
 
-        self.final_feat_dim = CLIP_DIM_MAPPING[backbone]
+        self.final_feat_dim = CLIP_DIM_MAPPING[vision_model]
 
     def forward(self, x):
         # x = self.transform(x)  # SetDataLoader yields transformed images
@@ -59,8 +59,9 @@ class CLIP(nn.Module):
         return x
 
 
-def clip_wrapper(backbone: str = "ViT-B/32", **kwargs):
-    return CLIP(backbone)
+def clip_wrapper(backbone: nn.Module, **kwargs):
+    """Wrap CLIP backbone for a ProtoNet model"""
+    return backbone
 
 
 def meta_test(model, test_dataloader):
@@ -90,9 +91,19 @@ def meta_test(model, test_dataloader):
 
 
 def main(args: argparse.Namespace):
+
+    clip_backbone = CLIP(vision_model=args.vision_model).to(DEVICE)
+    transform = clip_backbone.transform
+    model_func = partial(clip_wrapper, backbone=clip_backbone)
+    print(model_func)
+
     mgr_cls = MANAGER_DICT[args.dataset]
     datamgr = mgr_cls(
-        IMAGE_SIZE, n_way=args.n_way, n_query=args.n_query, n_support=args.n_support
+        IMAGE_SIZE,
+        transform,
+        n_way=args.n_way,
+        n_query=args.n_query,
+        n_support=args.n_support,
     )
 
     test_loader = datamgr.get_data_loader(aug=False)
@@ -101,8 +112,6 @@ def main(args: argparse.Namespace):
     print(x.size(), y.size())
     print(y)
 
-    model_func = partial(clip_wrapper, backbone=args.backbone)
-    print(model_func)
     protonet = ProtoNet(
         model_func, n_way=args.n_way, n_support=args.n_support, tf_path=None
     ).to(DEVICE)
