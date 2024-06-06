@@ -258,7 +258,10 @@ class SetDataManager(DataManager):
         self.transform = transform if transform else None
 
     def get_data_loader(self, aug):  # parameters that would change on train/val set
-        transform = self.trans_loader.get_composed_transform(aug)
+        if self.transform:
+            transform = self.transform
+        else:
+            transform = self.trans_loader.get_composed_transform(aug)
         dataset = SetDataset(self.batch_size, transform)
         self.dataset = dataset
         sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode)

@@ -35,6 +35,287 @@ For the ChestX, ISIC, EuroSAT, and CropDisease, we refer to the [BS-CDFSL](https
 
 If you can't find the Plantae dataset, we provide at [here](https://drive.google.com/file/d/1e3TklMlVBCG0XRfEw6DKStJGdmmXgvq5/view?usp=drive_link), please cite its paper. 
 
+### EuroSAT dataset
+- After downloading and unzipping, you should have a folder structure like this: 
+```sh
+$ tree --filelimit 20  # in EuroSAT/
+>>>
+.
+└── 2750
+    ├── AnnualCrop [3000 entries exceeds filelimit, not opening dir]
+    ├── Forest [3000 entries exceeds filelimit, not opening dir]
+    ├── HerbaceousVegetation [3000 entries exceeds filelimit, not opening dir]
+    ├── Highway [2500 entries exceeds filelimit, not opening dir]
+    ├── Industrial [2500 entries exceeds filelimit, not opening dir]
+    ├── Pasture [2000 entries exceeds filelimit, not opening dir]
+    ├── PermanentCrop [2500 entries exceeds filelimit, not opening dir]
+    ├── Residential [3000 entries exceeds filelimit, not opening dir]
+    ├── River [2500 entries exceeds filelimit, not opening dir]
+    └── SeaLake [3000 entries exceeds filelimit, not opening dir]
+
+11 directories, 0 files
+```
+
+### ISIC dataset
+- After downloading and unzipping, you should have a folder structure like this: 
+
+```sh
+$ tree --filelimit 20
+>>>
+.
+├── ISIC2018_Task3_Test_GroundTruth
+│   ├── ATTRIBUTION.txt
+│   ├── ISIC2018_Task3_Test_GroundTruth.csv
+│   └── LICENSE.txt
+├── ISIC2018_Task3_Test_Input [1514 entries exceeds filelimit, not opening dir]
+├── ISIC2018_Task3_Training_GroundTruth
+│   ├── ATTRIBUTION.txt
+│   ├── ISIC2018_Task3_Training_GroundTruth.csv
+│   └── LICENSE.txt
+├── ISIC2018_Task3_Training_Input [10017 entries exceeds filelimit, not opening dir]
+├── ISIC2018_Task3_Validation_GroundTruth
+│   ├── ATTRIBUTION.txt
+│   ├── ISIC2018_Task3_Validation_GroundTruth.csv
+│   └── LICENSE.txt
+└── ISIC2018_Task3_Validation_Input [195 entries exceeds filelimit, not opening dir]
+
+6 directories, 9 files
+```
+
+### CropDisease dataset
+- After downloading and unzipping, you should have a folder structure like this: 
+
+```sh
+$ tree --filelimit 40 -h -d  # in CropDisease/
+.
+├── [4.0K]  dataset
+│   ├── [4.0K]  test
+│   │   ├── [ 20K]  Apple___Apple_scab
+│   │   ├── [ 20K]  Apple___Black_rot
+│   │   ├── [4.0K]  Apple___Cedar_apple_rust
+│   │   ├── [ 36K]  Apple___healthy
+│   │   ├── [ 32K]  Blueberry___healthy
+│   │   ├── [ 24K]  Cherry_(including_sour)___Powdery_mildew
+│   │   ├── [ 20K]  Cherry_(including_sour)___healthy
+│   │   ├── [ 12K]  Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot
+│   │   ├── [ 12K]  Corn_(maize)___Common_rust_
+│   │   ├── [ 20K]  Corn_(maize)___Northern_Leaf_Blight
+│   │   ├── [ 28K]  Corn_(maize)___healthy
+│   │   ├── [ 28K]  Grape___Black_rot
+│   │   ├── [ 36K]  Grape___Esca_(Black_Measles)
+│   │   ├── [ 20K]  Grape___Leaf_blight_(Isariopsis_Leaf_Spot)
+│   │   ├── [ 12K]  Grape___healthy
+│   │   ├── [108K]  Orange___Haunglongbing_(Citrus_greening)
+│   │   ├── [ 40K]  Peach___Bacterial_spot
+│   │   ├── [ 12K]  Peach___healthy
+│   │   ├── [ 20K]  Pepper,_bell___Bacterial_spot
+│   │   ├── [ 32K]  Pepper,_bell___healthy
+│   │   ├── [ 20K]  Potato___Early_blight
+│   │   ├── [ 20K]  Potato___Late_blight
+│   │   ├── [4.0K]  Potato___healthy
+│   │   ├── [ 12K]  Raspberry___healthy
+│   │   ├── [100K]  Soybean___healthy
+│   │   ├── [ 40K]  Squash___Powdery_mildew
+│   │   ├── [ 24K]  Strawberry___Leaf_scorch
+│   │   ├── [ 12K]  Strawberry___healthy
+│   │   ├── [ 52K]  Tomato___Bacterial_spot
+│   │   ├── [ 24K]  Tomato___Early_blight
+│   │   ├── [ 36K]  Tomato___Late_blight
+│   │   ├── [ 20K]  Tomato___Leaf_Mold
+│   │   ├── [ 36K]  Tomato___Septoria_leaf_spot
+│   │   ├── [ 36K]  Tomato___Spider_mites Two-spotted_spider_mite
+│   │   ├── [ 36K]  Tomato___Target_Spot
+│   │   ├── [116K]  Tomato___Tomato_Yellow_Leaf_Curl_Virus
+│   │   ├── [ 12K]  Tomato___Tomato_mosaic_virus
+│   │   └── [ 36K]  Tomato___healthy
+│   └── [4.0K]  train
+│       ├── [ 52K]  Apple___Apple_scab
+│       ├── [ 56K]  Apple___Black_rot
+│       ├── [ 24K]  Apple___Cedar_apple_rust
+│       ├── [136K]  Apple___healthy
+│       ├── [120K]  Blueberry___healthy
+│       ├── [ 84K]  Cherry_(including_sour)___Powdery_mildew
+│       ├── [ 64K]  Cherry_(including_sour)___healthy
+│       ├── [ 48K]  Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot
+│       ├── [ 36K]  Corn_(maize)___Common_rust_
+│       ├── [ 76K]  Corn_(maize)___Northern_Leaf_Blight
+│       ├── [ 92K]  Corn_(maize)___healthy
+│       ├── [ 96K]  Grape___Black_rot
+│       ├── [104K]  Grape___Esca_(Black_Measles)
+│       ├── [ 92K]  Grape___Leaf_blight_(Isariopsis_Leaf_Spot)
+│       ├── [ 36K]  Grape___healthy
+│       ├── [436K]  Orange___Haunglongbing_(Citrus_greening)
+│       ├── [184K]  Peach___Bacterial_spot
+│       ├── [ 32K]  Peach___healthy
+│       ├── [ 76K]  Pepper,_bell___Bacterial_spot
+│       ├── [104K]  Pepper,_bell___healthy
+│       ├── [ 80K]  Potato___Early_blight
+│       ├── [ 76K]  Potato___Late_blight
+│       ├── [ 16K]  Potato___healthy
+│       ├── [ 32K]  Raspberry___healthy
+│       ├── [376K]  Soybean___healthy
+│       ├── [144K]  Squash___Powdery_mildew
+│       ├── [ 88K]  Strawberry___Leaf_scorch
+│       ├── [ 40K]  Strawberry___healthy
+│       ├── [184K]  Tomato___Bacterial_spot
+│       ├── [ 76K]  Tomato___Early_blight
+│       ├── [140K]  Tomato___Late_blight
+│       ├── [ 76K]  Tomato___Leaf_Mold
+│       ├── [140K]  Tomato___Septoria_leaf_spot
+│       ├── [128K]  Tomato___Spider_mites Two-spotted_spider_mite
+│       ├── [112K]  Tomato___Target_Spot
+│       ├── [444K]  Tomato___Tomato_Yellow_Leaf_Curl_Virus
+│       ├── [ 36K]  Tomato___Tomato_mosaic_virus
+│       └── [124K]  Tomato___healthy
+├── [4.0K]  test
+│   ├── [ 20K]  Apple___Apple_scab
+│   ├── [ 20K]  Apple___Black_rot
+│   ├── [4.0K]  Apple___Cedar_apple_rust
+│   ├── [ 36K]  Apple___healthy
+│   ├── [ 32K]  Blueberry___healthy
+│   ├── [ 24K]  Cherry_(including_sour)___Powdery_mildew
+│   ├── [ 20K]  Cherry_(including_sour)___healthy
+│   ├── [ 12K]  Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot
+│   ├── [ 12K]  Corn_(maize)___Common_rust_
+│   ├── [ 20K]  Corn_(maize)___Northern_Leaf_Blight
+│   ├── [ 28K]  Corn_(maize)___healthy
+│   ├── [ 28K]  Grape___Black_rot
+│   ├── [ 36K]  Grape___Esca_(Black_Measles)
+│   ├── [ 20K]  Grape___Leaf_blight_(Isariopsis_Leaf_Spot)
+│   ├── [ 12K]  Grape___healthy
+│   ├── [108K]  Orange___Haunglongbing_(Citrus_greening)
+│   ├── [ 40K]  Peach___Bacterial_spot
+│   ├── [ 12K]  Peach___healthy
+│   ├── [ 20K]  Pepper,_bell___Bacterial_spot
+│   ├── [ 32K]  Pepper,_bell___healthy
+│   ├── [ 20K]  Potato___Early_blight
+│   ├── [ 20K]  Potato___Late_blight
+│   ├── [4.0K]  Potato___healthy
+│   ├── [ 12K]  Raspberry___healthy
+│   ├── [100K]  Soybean___healthy
+│   ├── [ 40K]  Squash___Powdery_mildew
+│   ├── [ 24K]  Strawberry___Leaf_scorch
+│   ├── [ 12K]  Strawberry___healthy
+│   ├── [ 52K]  Tomato___Bacterial_spot
+│   ├── [ 24K]  Tomato___Early_blight
+│   ├── [ 36K]  Tomato___Late_blight
+│   ├── [ 20K]  Tomato___Leaf_Mold
+│   ├── [ 36K]  Tomato___Septoria_leaf_spot
+│   ├── [ 36K]  Tomato___Spider_mites Two-spotted_spider_mite
+│   ├── [ 36K]  Tomato___Target_Spot
+│   ├── [116K]  Tomato___Tomato_Yellow_Leaf_Curl_Virus
+│   ├── [ 12K]  Tomato___Tomato_mosaic_virus
+│   └── [ 36K]  Tomato___healthy
+└── [4.0K]  train
+    ├── [ 52K]  Apple___Apple_scab
+    ├── [ 56K]  Apple___Black_rot
+    ├── [ 24K]  Apple___Cedar_apple_rust
+    ├── [136K]  Apple___healthy
+    ├── [120K]  Blueberry___healthy
+    ├── [ 84K]  Cherry_(including_sour)___Powdery_mildew
+    ├── [ 64K]  Cherry_(including_sour)___healthy
+    ├── [ 48K]  Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot
+    ├── [ 36K]  Corn_(maize)___Common_rust_
+    ├── [ 76K]  Corn_(maize)___Northern_Leaf_Blight
+    ├── [ 92K]  Corn_(maize)___healthy
+    ├── [ 96K]  Grape___Black_rot
+    ├── [104K]  Grape___Esca_(Black_Measles)
+    ├── [ 92K]  Grape___Leaf_blight_(Isariopsis_Leaf_Spot)
+    ├── [ 36K]  Grape___healthy
+    ├── [436K]  Orange___Haunglongbing_(Citrus_greening)
+    ├── [184K]  Peach___Bacterial_spot
+    ├── [ 32K]  Peach___healthy
+    ├── [ 76K]  Pepper,_bell___Bacterial_spot
+    ├── [104K]  Pepper,_bell___healthy
+    ├── [ 80K]  Potato___Early_blight
+    ├── [ 76K]  Potato___Late_blight
+    ├── [ 16K]  Potato___healthy
+    ├── [ 32K]  Raspberry___healthy
+    ├── [376K]  Soybean___healthy
+    ├── [144K]  Squash___Powdery_mildew
+    ├── [ 88K]  Strawberry___Leaf_scorch
+    ├── [ 40K]  Strawberry___healthy
+    ├── [184K]  Tomato___Bacterial_spot
+    ├── [ 76K]  Tomato___Early_blight
+    ├── [140K]  Tomato___Late_blight
+    ├── [ 76K]  Tomato___Leaf_Mold
+    ├── [140K]  Tomato___Septoria_leaf_spot
+    ├── [128K]  Tomato___Spider_mites Two-spotted_spider_mite
+    ├── [112K]  Tomato___Target_Spot
+    ├── [444K]  Tomato___Tomato_Yellow_Leaf_Curl_Virus
+    ├── [ 36K]  Tomato___Tomato_mosaic_virus
+    └── [124K]  Tomato___healthy
+
+157 directories
+```
+
+### ChestX dataset
+- After downloading and unzipping, you may have a folder structure like this: 
+
+```sh
+$ tree --filelimit 20  # in ChestX/
+>>>
+.  # ChestX/
+├── ARXIV_V5_CHESTXRAY.pdf
+├── BBox_List_2017.csv
+├── Data_Entry_2017.csv
+├── FAQ_CHESTXRAY.pdf
+├── LOG_CHESTXRAY.pdf
+├── README_CHESTXRAY.pdf
+├── images_001
+│   └── images [4999 entries exceeds filelimit, not opening dir]
+├── images_002
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_003
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_004
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_005
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_006
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_007
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_008
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_009
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_010
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_011
+│   └── images [10000 entries exceeds filelimit, not opening dir]
+├── images_012
+│   └── images [7121 entries exceeds filelimit, not opening dir]
+├── test_list.txt
+└── train_val_list.txt
+
+24 directories, 8 files
+```
+
+The `SetDataset` classes in `cross_domain_fsl/data/Chest_few_shot.py` expect only a single folder containing all the images. To achieve this, you can go into the run the following commands:
+
+```sh
+# Assuming you are in the ChestX/ directory
+mkdir images
+find . -name "*.png" -exec mv -t images/ {} +
+```
+This should result in a file structure like this:
+```sh
+$ tree --filelimit 20  # in ChestX/
+>>>
+.
+├── ARXIV_V5_CHESTXRAY.pdf
+├── BBox_List_2017.csv
+├── Data_Entry_2017.csv
+├── FAQ_CHESTXRAY.pdf
+├── LOG_CHESTXRAY.pdf
+├── README_CHESTXRAY.pdf
+├── images [112120 entries exceeds filelimit, not opening dir]
+├── test_list.txt
+└── train_val_list.txt
+
+1 directory, 8 files
+```
 
 # 3 StyleAdv based on ResNet
 ## 3.1 meta-train StyleAdv
