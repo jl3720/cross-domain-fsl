@@ -64,29 +64,66 @@ def clip_wrapper(backbone: nn.Module, **kwargs):
     return backbone
 
 
-def meta_test(model, test_dataloader):
-    acc_all = []
+def meta_test(model, datamgr):
+    test_dataloader = datamgr.get_data_loader(aug=False)
+
+    n_classes = len(datamgr.dataset.sub_meta)  # Bit hacky
+    n_episode = datamgr.n_episode
     IS_FEATURE = False
+    acc_all = []
+    class_acc_all = torch.zeros(n_classes, n_episode)
+    # Mask for classes that appear in episode
+    classes_mask = torch.zeros(n_classes, n_episode)
+
+    model.eval()
     for i, (x, y) in enumerate(test_dataloader):
         # x, y = next(iter(test_dataloader))
         x = x.to(DEVICE)
         y = y.to(DEVICE)
+
+        classes = y[:, 0]
+        classes_mask[classes, i] = 1  # Update mask
 
         y_query = y[:, model.n_support :].contiguous().view(-1)
         # x_var = torch.autograd.Variable(x)
         # 5x5 sets for testing
         scores = model.set_forward(x, IS_FEATURE)
 
-        preds = nn.functional.softmax(scores, dim=1).argmax(1)
+        # raw_preds are indices of selected subset of classes
+        raw_preds = nn.functional.softmax(scores, dim=1).argmax(1)
+        preds = classes[raw_preds]  # map to actual class indices
         acc = torch.sum(preds == y_query) / len(y_query)
         acc_all.append(acc)
-        print(f"Batch accuracy: {acc.item()}")
+        print(f"Batch average accuracy: {acc.item()}")
+
+        preds_by_class = preds.contiguous().view(model.n_way, model.n_query)
+        y_query_by_class = y_query.contiguous().view(model.n_way, model.n_query)
+
+        acc_by_class = (
+            torch.sum(preds_by_class == y_query_by_class, dim=1) / model.n_query
+        )
+        for j, acc in enumerate(acc_by_class):
+            print(f"Class {classes[j]} accuracy: {acc.item()}")
+
+        for j, cl in enumerate(classes):
+            class_acc_all[cl, i] = acc_by_class[j]
 
     with torch.no_grad():
         acc_all = torch.tensor(acc_all)
         acc_mean = torch.mean(acc_all)
         acc_std = torch.std(acc_all)
-    print("Test Acc = %4.2f%% +- %4.2f%%" % (acc_mean * 100, acc_std * 100))
+
+        # Use mask to ignore zero entries
+        class_acc_mean = torch.sum(class_acc_all, dim=1) / classes_mask.sum(dim=1)
+        class_acc_all[classes_mask == 0] = torch.nan  # Mask out unused classes
+        class_acc_std = np.nanstd(class_acc_all.cpu().numpy(), axis=1)
+
+    print("Average test Acc = %4.2f%% +- %4.2f%%" % (acc_mean * 100, acc_std * 100))
+    for i in range(n_classes):  # Assumes classes are 0 - (N-1)
+        print(
+            "Class %d Test Acc = %4.2f%% +- %4.2f%%"
+            % (i, class_acc_mean[i] * 100, class_acc_std[i] * 100)
+        )
     return acc_mean, acc_std
 
 
@@ -95,7 +132,7 @@ def main(args: argparse.Namespace):
     clip_backbone = CLIP(vision_model=args.vision_model).to(DEVICE)
     transform = clip_backbone.transform
     model_func = partial(clip_wrapper, backbone=clip_backbone)
-    print(model_func)
+    # print(model_func)
 
     mgr_cls = MANAGER_DICT[args.dataset]
     datamgr = mgr_cls(
@@ -106,17 +143,11 @@ def main(args: argparse.Namespace):
         n_support=args.n_support,
     )
 
-    test_loader = datamgr.get_data_loader(aug=False)
-
-    x, y = next(iter(test_loader))
-    print(x.size(), y.size())
-    print(y)
-
     protonet = ProtoNet(
         model_func, n_way=args.n_way, n_support=args.n_support, tf_path=None
     ).to(DEVICE)
 
-    acc_mean, acc_std = meta_test(protonet, test_loader)
+    acc_mean, acc_std = meta_test(protonet, datamgr)
 
 
 if __name__ == "__main__":
