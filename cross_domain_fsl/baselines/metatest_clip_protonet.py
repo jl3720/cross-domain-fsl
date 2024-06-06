@@ -26,7 +26,12 @@ IMAGE_SIZE = 224
 CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1024}
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", type=str, default="EuroSAT")
+parser.add_argument(
+    "--dataset",
+    type=str,
+    default="EuroSAT",
+    help="Valid options: {'EuroSAT', 'CropDisease', 'ISIC', 'ChestX'}",
+)
 parser.add_argument(
     "--vision_model", type=str, default="ViT-B/32", help="CLIP Vision backbone"
 )

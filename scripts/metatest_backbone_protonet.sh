@@ -9,7 +9,7 @@ conda activate style-adv
 
 # Get the current time
 time=`date +%Y%m%d`
-echo $time
+echo $(date +%H%M%S-%Y%m%d)
 
 # Run the pipeline
 # N.B. passes all args to scripts, only works because scripts accept same args
