@@ -1,0 +1,681 @@
+/bin/bash: /scratch_net/biwidl309/jamliu/conda_envs/updated-sfdg/lib/libtinfo.so.6: no version information available (required by /bin/bash)
+20240606
+Namespace(dataset='CropDisease', n_query=15, n_support=5, n_way=5, vision_model='ViT-B/32')
+504
+497
+220
+1316
+1202
+842
+684
+411
+954
+788
+930
+944
+1107
+861
+339
+4406
+1838
+288
+798
+1183
+800
+800
+122
+297
+4072
+1468
+888
+365
+1702
+800
+1528
+762
+1417
+1341
+1124
+4286
+299
+1273
+Batch average accuracy: 0.8666666746139526
+Class 2 accuracy: 1.0
+Class 31 accuracy: 0.8666667342185974
+Class 18 accuracy: 0.7333333492279053
+Class 22 accuracy: 1.0
+Class 27 accuracy: 0.7333333492279053
+Batch average accuracy: 0.8799999952316284
+Class 18 accuracy: 0.8000000715255737
+Class 7 accuracy: 1.0
+Class 0 accuracy: 0.8666667342185974
+Class 6 accuracy: 1.0
+Class 27 accuracy: 0.7333333492279053
+Batch average accuracy: 0.9200000166893005
+Class 23 accuracy: 1.0
+Class 16 accuracy: 0.8666667342185974
+Class 34 accuracy: 0.8000000715255737
+Class 5 accuracy: 0.9333333969116211
+Class 10 accuracy: 1.0
+Batch average accuracy: 0.893333375453949
+Class 3 accuracy: 0.9333333969116211
+Class 35 accuracy: 0.8666667342185974
+Class 1 accuracy: 0.8000000715255737
+Class 13 accuracy: 1.0
+Class 18 accuracy: 0.8666667342185974
+Batch average accuracy: 0.8799999952316284
+Class 14 accuracy: 0.9333333969116211
+Class 37 accuracy: 1.0
+Class 5 accuracy: 1.0
+Class 32 accuracy: 0.8666667342185974
+Class 2 accuracy: 0.6000000238418579
+Batch average accuracy: 0.8133333325386047
+Class 33 accuracy: 0.46666669845581055
+Class 5 accuracy: 0.8666667342185974
+Class 10 accuracy: 1.0
+Class 34 accuracy: 0.7333333492279053
+Class 8 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 0 accuracy: 1.0
+Class 23 accuracy: 0.9333333969116211
+Class 19 accuracy: 0.9333333969116211
+Class 24 accuracy: 0.7333333492279053
+Class 34 accuracy: 0.9333333969116211
+Batch average accuracy: 0.893333375453949
+Class 22 accuracy: 0.8000000715255737
+Class 21 accuracy: 0.8000000715255737
+Class 3 accuracy: 1.0
+Class 5 accuracy: 0.8666667342185974
+Class 23 accuracy: 1.0
+Batch average accuracy: 0.6399999856948853
+Class 34 accuracy: 0.6666666865348816
+Class 33 accuracy: 0.5333333611488342
+Class 29 accuracy: 0.8000000715255737
+Class 28 accuracy: 0.5333333611488342
+Class 36 accuracy: 0.6666666865348816
+Batch average accuracy: 0.9200000166893005
+Class 18 accuracy: 1.0
+Class 26 accuracy: 0.8666667342185974
+Class 8 accuracy: 1.0
+Class 21 accuracy: 0.8000000715255737
+Class 31 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9066666960716248
+Class 13 accuracy: 1.0
+Class 5 accuracy: 0.9333333969116211
+Class 19 accuracy: 0.8666667342185974
+Class 14 accuracy: 1.0
+Class 24 accuracy: 0.7333333492279053
+Batch average accuracy: 0.9466667175292969
+Class 34 accuracy: 1.0
+Class 35 accuracy: 0.8666667342185974
+Class 36 accuracy: 0.9333333969116211
+Class 17 accuracy: 0.9333333969116211
+Class 9 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 17 accuracy: 0.7333333492279053
+Class 5 accuracy: 0.8666667342185974
+Class 25 accuracy: 1.0
+Class 2 accuracy: 0.9333333969116211
+Class 16 accuracy: 1.0
+Batch average accuracy: 0.7066667079925537
+Class 16 accuracy: 0.5333333611488342
+Class 28 accuracy: 0.6000000238418579
+Class 7 accuracy: 1.0
+Class 31 accuracy: 0.9333333969116211
+Class 32 accuracy: 0.46666669845581055
+Batch average accuracy: 0.8666666746139526
+Class 35 accuracy: 0.7333333492279053
+Class 18 accuracy: 0.6000000238418579
+Class 27 accuracy: 1.0
+Class 20 accuracy: 1.0
+Class 8 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 7 accuracy: 1.0
+Class 31 accuracy: 0.8666667342185974
+Class 37 accuracy: 0.7333333492279053
+Class 1 accuracy: 1.0
+Class 35 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9066666960716248
+Class 7 accuracy: 1.0
+Class 36 accuracy: 1.0
+Class 0 accuracy: 0.6666666865348816
+Class 5 accuracy: 0.8666667342185974
+Class 3 accuracy: 1.0
+Batch average accuracy: 0.7733333706855774
+Class 24 accuracy: 0.6666666865348816
+Class 15 accuracy: 1.0
+Class 37 accuracy: 0.8666667342185974
+Class 21 accuracy: 0.9333333969116211
+Class 34 accuracy: 0.40000003576278687
+Batch average accuracy: 0.8799999952316284
+Class 31 accuracy: 0.8000000715255737
+Class 13 accuracy: 1.0
+Class 34 accuracy: 0.9333333969116211
+Class 3 accuracy: 0.8666667342185974
+Class 1 accuracy: 0.8000000715255737
+Batch average accuracy: 0.9333333373069763
+Class 14 accuracy: 1.0
+Class 27 accuracy: 0.9333333969116211
+Class 18 accuracy: 0.8000000715255737
+Class 8 accuracy: 1.0
+Class 5 accuracy: 0.9333333969116211
+Batch average accuracy: 0.8799999952316284
+Class 22 accuracy: 1.0
+Class 18 accuracy: 0.6666666865348816
+Class 15 accuracy: 1.0
+Class 5 accuracy: 0.8666667342185974
+Class 27 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9200000166893005
+Class 35 accuracy: 0.8666667342185974
+Class 36 accuracy: 1.0
+Class 3 accuracy: 1.0
+Class 32 accuracy: 0.9333333969116211
+Class 24 accuracy: 0.8000000715255737
+Batch average accuracy: 0.9066666960716248
+Class 17 accuracy: 1.0
+Class 16 accuracy: 0.8000000715255737
+Class 2 accuracy: 0.8666667342185974
+Class 34 accuracy: 0.8666667342185974
+Class 22 accuracy: 1.0
+Batch average accuracy: 0.9200000166893005
+Class 23 accuracy: 1.0
+Class 17 accuracy: 0.8000000715255737
+Class 25 accuracy: 1.0
+Class 28 accuracy: 0.9333333969116211
+Class 3 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9466667175292969
+Class 13 accuracy: 1.0
+Class 34 accuracy: 0.8666667342185974
+Class 35 accuracy: 0.9333333969116211
+Class 3 accuracy: 0.9333333969116211
+Class 21 accuracy: 1.0
+Batch average accuracy: 0.893333375453949
+Class 17 accuracy: 0.8666667342185974
+Class 19 accuracy: 0.8000000715255737
+Class 0 accuracy: 0.8666667342185974
+Class 11 accuracy: 0.9333333969116211
+Class 29 accuracy: 1.0
+Batch average accuracy: 0.9866666793823242
+Class 1 accuracy: 0.9333333969116211
+Class 15 accuracy: 1.0
+Class 7 accuracy: 1.0
+Class 14 accuracy: 1.0
+Class 21 accuracy: 1.0
+Batch average accuracy: 0.800000011920929
+Class 28 accuracy: 0.7333333492279053
+Class 31 accuracy: 0.8000000715255737
+Class 34 accuracy: 0.9333333969116211
+Class 32 accuracy: 0.6666666865348816
+Class 11 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9333333373069763
+Class 12 accuracy: 1.0
+Class 10 accuracy: 1.0
+Class 35 accuracy: 0.9333333969116211
+Class 5 accuracy: 0.9333333969116211
+Class 28 accuracy: 0.8000000715255737
+Batch average accuracy: 0.8799999952316284
+Class 2 accuracy: 0.9333333969116211
+Class 31 accuracy: 0.8000000715255737
+Class 19 accuracy: 0.9333333969116211
+Class 33 accuracy: 0.7333333492279053
+Class 14 accuracy: 1.0
+Batch average accuracy: 0.8266667127609253
+Class 4 accuracy: 0.6666666865348816
+Class 9 accuracy: 1.0
+Class 3 accuracy: 0.8000000715255737
+Class 19 accuracy: 0.6666666865348816
+Class 10 accuracy: 1.0
+Batch average accuracy: 0.9200000166893005
+Class 29 accuracy: 0.8000000715255737
+Class 19 accuracy: 1.0
+Class 14 accuracy: 1.0
+Class 3 accuracy: 1.0
+Class 0 accuracy: 0.8000000715255737
+Batch average accuracy: 0.9866666793823242
+Class 8 accuracy: 1.0
+Class 4 accuracy: 1.0
+Class 34 accuracy: 0.9333333969116211
+Class 23 accuracy: 1.0
+Class 11 accuracy: 1.0
+Batch average accuracy: 0.9466667175292969
+Class 3 accuracy: 1.0
+Class 17 accuracy: 1.0
+Class 25 accuracy: 1.0
+Class 1 accuracy: 0.9333333969116211
+Class 14 accuracy: 0.8000000715255737
+Batch average accuracy: 0.9466667175292969
+Class 4 accuracy: 0.8666667342185974
+Class 11 accuracy: 1.0
+Class 32 accuracy: 0.9333333969116211
+Class 9 accuracy: 1.0
+Class 6 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9466667175292969
+Class 9 accuracy: 1.0
+Class 15 accuracy: 0.9333333969116211
+Class 36 accuracy: 0.9333333969116211
+Class 20 accuracy: 0.9333333969116211
+Class 28 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9066666960716248
+Class 9 accuracy: 1.0
+Class 35 accuracy: 0.9333333969116211
+Class 22 accuracy: 0.9333333969116211
+Class 16 accuracy: 0.8666667342185974
+Class 29 accuracy: 0.8000000715255737
+Batch average accuracy: 0.8666666746139526
+Class 14 accuracy: 1.0
+Class 0 accuracy: 0.7333333492279053
+Class 25 accuracy: 1.0
+Class 17 accuracy: 1.0
+Class 1 accuracy: 0.6000000238418579
+Batch average accuracy: 0.7866666913032532
+Class 16 accuracy: 0.8000000715255737
+Class 23 accuracy: 0.6666666865348816
+Class 27 accuracy: 1.0
+Class 29 accuracy: 0.5333333611488342
+Class 35 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9466667175292969
+Class 21 accuracy: 1.0
+Class 37 accuracy: 1.0
+Class 14 accuracy: 1.0
+Class 29 accuracy: 0.7333333492279053
+Class 25 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 8 accuracy: 1.0
+Class 19 accuracy: 1.0
+Class 32 accuracy: 0.9333333969116211
+Class 16 accuracy: 0.7333333492279053
+Class 1 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9733333587646484
+Class 13 accuracy: 1.0
+Class 22 accuracy: 1.0
+Class 18 accuracy: 0.9333333969116211
+Class 8 accuracy: 1.0
+Class 25 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9466667175292969
+Class 35 accuracy: 0.9333333969116211
+Class 3 accuracy: 1.0
+Class 11 accuracy: 1.0
+Class 15 accuracy: 1.0
+Class 24 accuracy: 0.8000000715255737
+Batch average accuracy: 0.9466667175292969
+Class 3 accuracy: 0.8666667342185974
+Class 35 accuracy: 0.9333333969116211
+Class 14 accuracy: 1.0
+Class 10 accuracy: 0.9333333969116211
+Class 7 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 19 accuracy: 0.9333333969116211
+Class 7 accuracy: 1.0
+Class 10 accuracy: 0.9333333969116211
+Class 5 accuracy: 0.8000000715255737
+Class 29 accuracy: 0.8666667342185974
+Batch average accuracy: 0.8400000333786011
+Class 5 accuracy: 0.9333333969116211
+Class 16 accuracy: 0.6000000238418579
+Class 24 accuracy: 1.0
+Class 3 accuracy: 0.8000000715255737
+Class 0 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9866666793823242
+Class 4 accuracy: 1.0
+Class 35 accuracy: 0.9333333969116211
+Class 13 accuracy: 1.0
+Class 23 accuracy: 1.0
+Class 1 accuracy: 1.0
+Batch average accuracy: 0.9333333373069763
+Class 36 accuracy: 1.0
+Class 5 accuracy: 0.9333333969116211
+Class 15 accuracy: 0.8000000715255737
+Class 32 accuracy: 0.9333333969116211
+Class 8 accuracy: 1.0
+Batch average accuracy: 0.893333375453949
+Class 6 accuracy: 1.0
+Class 0 accuracy: 0.8000000715255737
+Class 12 accuracy: 1.0
+Class 30 accuracy: 0.8000000715255737
+Class 26 accuracy: 0.8666667342185974
+Batch average accuracy: 0.893333375453949
+Class 36 accuracy: 1.0
+Class 14 accuracy: 1.0
+Class 30 accuracy: 0.6666666865348816
+Class 26 accuracy: 0.8000000715255737
+Class 2 accuracy: 1.0
+Batch average accuracy: 0.9466667175292969
+Class 13 accuracy: 0.9333333969116211
+Class 8 accuracy: 1.0
+Class 4 accuracy: 1.0
+Class 20 accuracy: 0.8000000715255737
+Class 37 accuracy: 1.0
+Batch average accuracy: 0.8799999952316284
+Class 16 accuracy: 0.5333333611488342
+Class 29 accuracy: 0.9333333969116211
+Class 27 accuracy: 1.0
+Class 10 accuracy: 1.0
+Class 5 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9600000381469727
+Class 6 accuracy: 1.0
+Class 9 accuracy: 1.0
+Class 8 accuracy: 0.8000000715255737
+Class 25 accuracy: 1.0
+Class 27 accuracy: 1.0
+Batch average accuracy: 0.8533333539962769
+Class 7 accuracy: 1.0
+Class 24 accuracy: 0.8000000715255737
+Class 20 accuracy: 1.0
+Class 22 accuracy: 0.8666667342185974
+Class 6 accuracy: 0.6000000238418579
+Batch average accuracy: 0.8799999952316284
+Class 31 accuracy: 1.0
+Class 25 accuracy: 1.0
+Class 32 accuracy: 0.7333333492279053
+Class 21 accuracy: 0.9333333969116211
+Class 1 accuracy: 0.7333333492279053
+Batch average accuracy: 0.8533333539962769
+Class 3 accuracy: 0.9333333969116211
+Class 32 accuracy: 0.9333333969116211
+Class 16 accuracy: 0.8000000715255737
+Class 30 accuracy: 0.8000000715255737
+Class 36 accuracy: 0.8000000715255737
+Batch average accuracy: 0.8666666746139526
+Class 29 accuracy: 0.5333333611488342
+Class 22 accuracy: 1.0
+Class 0 accuracy: 0.9333333969116211
+Class 32 accuracy: 0.8666667342185974
+Class 15 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 3 accuracy: 0.6000000238418579
+Class 27 accuracy: 0.9333333969116211
+Class 15 accuracy: 1.0
+Class 11 accuracy: 1.0
+Class 4 accuracy: 1.0
+Batch average accuracy: 0.9066666960716248
+Class 37 accuracy: 0.8000000715255737
+Class 21 accuracy: 0.8666667342185974
+Class 22 accuracy: 0.9333333969116211
+Class 6 accuracy: 0.9333333969116211
+Class 13 accuracy: 1.0
+Batch average accuracy: 0.8533333539962769
+Class 14 accuracy: 1.0
+Class 26 accuracy: 0.8666667342185974
+Class 5 accuracy: 0.9333333969116211
+Class 30 accuracy: 0.8000000715255737
+Class 28 accuracy: 0.6666666865348816
+Batch average accuracy: 0.8666666746139526
+Class 36 accuracy: 0.8000000715255737
+Class 31 accuracy: 0.6666666865348816
+Class 5 accuracy: 0.8666667342185974
+Class 15 accuracy: 1.0
+Class 13 accuracy: 1.0
+Batch average accuracy: 0.9333333373069763
+Class 0 accuracy: 1.0
+Class 13 accuracy: 1.0
+Class 27 accuracy: 1.0
+Class 4 accuracy: 0.8000000715255737
+Class 37 accuracy: 0.8666667342185974
+Batch average accuracy: 0.893333375453949
+Class 17 accuracy: 1.0
+Class 35 accuracy: 0.5333333611488342
+Class 16 accuracy: 0.9333333969116211
+Class 23 accuracy: 1.0
+Class 31 accuracy: 1.0
+Batch average accuracy: 0.7866666913032532
+Class 30 accuracy: 0.5333333611488342
+Class 32 accuracy: 0.5333333611488342
+Class 17 accuracy: 1.0
+Class 1 accuracy: 0.8666667342185974
+Class 27 accuracy: 1.0
+Batch average accuracy: 0.9333333373069763
+Class 37 accuracy: 0.8666667342185974
+Class 5 accuracy: 1.0
+Class 11 accuracy: 1.0
+Class 17 accuracy: 0.9333333969116211
+Class 30 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9333333373069763
+Class 7 accuracy: 1.0
+Class 32 accuracy: 0.8666667342185974
+Class 35 accuracy: 0.9333333969116211
+Class 5 accuracy: 0.8666667342185974
+Class 22 accuracy: 1.0
+Batch average accuracy: 0.9466667175292969
+Class 24 accuracy: 0.8666667342185974
+Class 35 accuracy: 0.8666667342185974
+Class 20 accuracy: 1.0
+Class 34 accuracy: 1.0
+Class 25 accuracy: 1.0
+Batch average accuracy: 0.9333333373069763
+Class 36 accuracy: 1.0
+Class 12 accuracy: 1.0
+Class 7 accuracy: 0.8666667342185974
+Class 16 accuracy: 0.9333333969116211
+Class 35 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9866666793823242
+Class 7 accuracy: 1.0
+Class 20 accuracy: 0.9333333969116211
+Class 1 accuracy: 1.0
+Class 31 accuracy: 1.0
+Class 12 accuracy: 1.0
+Batch average accuracy: 0.8400000333786011
+Class 20 accuracy: 0.8000000715255737
+Class 21 accuracy: 0.6000000238418579
+Class 13 accuracy: 0.9333333969116211
+Class 31 accuracy: 0.9333333969116211
+Class 5 accuracy: 0.9333333969116211
+Batch average accuracy: 0.893333375453949
+Class 32 accuracy: 0.8666667342185974
+Class 19 accuracy: 1.0
+Class 11 accuracy: 1.0
+Class 28 accuracy: 0.6000000238418579
+Class 23 accuracy: 1.0
+Batch average accuracy: 0.9200000166893005
+Class 26 accuracy: 1.0
+Class 23 accuracy: 1.0
+Class 17 accuracy: 0.7333333492279053
+Class 12 accuracy: 1.0
+Class 4 accuracy: 0.8666667342185974
+Batch average accuracy: 0.7733333706855774
+Class 14 accuracy: 1.0
+Class 32 accuracy: 0.6666666865348816
+Class 30 accuracy: 0.8666667342185974
+Class 6 accuracy: 1.0
+Class 28 accuracy: 0.3333333432674408
+Batch average accuracy: 0.9200000166893005
+Class 22 accuracy: 1.0
+Class 7 accuracy: 1.0
+Class 0 accuracy: 0.8000000715255737
+Class 15 accuracy: 0.8666667342185974
+Class 27 accuracy: 0.9333333969116211
+Batch average accuracy: 0.8266667127609253
+Class 35 accuracy: 0.9333333969116211
+Class 2 accuracy: 1.0
+Class 13 accuracy: 0.8666667342185974
+Class 32 accuracy: 0.40000003576278687
+Class 16 accuracy: 0.9333333969116211
+Batch average accuracy: 0.893333375453949
+Class 19 accuracy: 1.0
+Class 35 accuracy: 0.9333333969116211
+Class 12 accuracy: 0.6000000238418579
+Class 11 accuracy: 0.9333333969116211
+Class 27 accuracy: 1.0
+Batch average accuracy: 0.9733333587646484
+Class 7 accuracy: 1.0
+Class 26 accuracy: 1.0
+Class 37 accuracy: 0.9333333969116211
+Class 24 accuracy: 1.0
+Class 16 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9600000381469727
+Class 11 accuracy: 0.9333333969116211
+Class 17 accuracy: 0.9333333969116211
+Class 8 accuracy: 1.0
+Class 28 accuracy: 1.0
+Class 1 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9333333373069763
+Class 9 accuracy: 1.0
+Class 15 accuracy: 1.0
+Class 1 accuracy: 0.8666667342185974
+Class 18 accuracy: 0.8000000715255737
+Class 27 accuracy: 1.0
+Batch average accuracy: 0.9200000166893005
+Class 31 accuracy: 1.0
+Class 15 accuracy: 0.9333333969116211
+Class 2 accuracy: 0.8666667342185974
+Class 28 accuracy: 0.8666667342185974
+Class 3 accuracy: 0.9333333969116211
+Batch average accuracy: 0.8666666746139526
+Class 31 accuracy: 0.9333333969116211
+Class 18 accuracy: 0.8000000715255737
+Class 1 accuracy: 0.9333333969116211
+Class 4 accuracy: 0.9333333969116211
+Class 26 accuracy: 0.7333333492279053
+Batch average accuracy: 0.9733333587646484
+Class 21 accuracy: 0.9333333969116211
+Class 2 accuracy: 1.0
+Class 35 accuracy: 0.9333333969116211
+Class 25 accuracy: 1.0
+Class 8 accuracy: 1.0
+Batch average accuracy: 0.9200000166893005
+Class 15 accuracy: 1.0
+Class 32 accuracy: 1.0
+Class 6 accuracy: 1.0
+Class 8 accuracy: 1.0
+Class 9 accuracy: 0.6000000238418579
+Batch average accuracy: 0.9333333373069763
+Class 18 accuracy: 0.9333333969116211
+Class 34 accuracy: 1.0
+Class 4 accuracy: 1.0
+Class 9 accuracy: 0.8666667342185974
+Class 3 accuracy: 0.8666667342185974
+Batch average accuracy: 0.9333333373069763
+Class 36 accuracy: 1.0
+Class 10 accuracy: 1.0
+Class 1 accuracy: 0.8666667342185974
+Class 18 accuracy: 0.8666667342185974
+Class 28 accuracy: 0.9333333969116211
+Batch average accuracy: 0.9600000381469727
+Class 32 accuracy: 0.8666667342185974
+Class 27 accuracy: 1.0
+Class 25 accuracy: 1.0
+Class 2 accuracy: 1.0
+Class 18 accuracy: 0.9333333969116211
+Batch average accuracy: 0.7866666913032532
+Class 6 accuracy: 1.0
+Class 32 accuracy: 0.6000000238418579
+Class 31 accuracy: 0.8666667342185974
+Class 1 accuracy: 0.6666666865348816
+Class 0 accuracy: 0.8000000715255737
+Batch average accuracy: 0.9600000381469727
+Class 30 accuracy: 0.8666667342185974
+Class 13 accuracy: 0.9333333969116211
+Class 28 accuracy: 1.0
+Class 24 accuracy: 1.0
+Class 10 accuracy: 1.0
+Batch average accuracy: 0.9733333587646484
+Class 7 accuracy: 1.0
+Class 16 accuracy: 0.8666667342185974
+Class 10 accuracy: 1.0
+Class 25 accuracy: 1.0
+Class 6 accuracy: 1.0
+Batch average accuracy: 1.0
+Class 10 accuracy: 1.0
+Class 5 accuracy: 1.0
+Class 14 accuracy: 1.0
+Class 15 accuracy: 1.0
+Class 7 accuracy: 1.0
+Batch average accuracy: 0.8400000333786011
+Class 0 accuracy: 0.6666666865348816
+Class 14 accuracy: 1.0
+Class 31 accuracy: 0.9333333969116211
+Class 35 accuracy: 0.8666667342185974
+Class 18 accuracy: 0.7333333492279053
+Batch average accuracy: 0.9600000381469727
+Class 30 accuracy: 0.8000000715255737
+Class 11 accuracy: 1.0
+Class 36 accuracy: 1.0
+Class 18 accuracy: 1.0
+Class 2 accuracy: 1.0
+Batch average accuracy: 1.0
+Class 4 accuracy: 1.0
+Class 9 accuracy: 1.0
+Class 25 accuracy: 1.0
+Class 21 accuracy: 1.0
+Class 6 accuracy: 1.0
+Batch average accuracy: 0.893333375453949
+Class 1 accuracy: 1.0
+Class 8 accuracy: 1.0
+Class 23 accuracy: 1.0
+Class 37 accuracy: 0.9333333969116211
+Class 36 accuracy: 0.5333333611488342
+Batch average accuracy: 0.9733333587646484
+Class 20 accuracy: 0.9333333969116211
+Class 5 accuracy: 1.0
+Class 13 accuracy: 0.9333333969116211
+Class 10 accuracy: 1.0
+Class 6 accuracy: 1.0
+Batch average accuracy: 0.8533333539962769
+Class 5 accuracy: 0.9333333969116211
+Class 9 accuracy: 0.8666667342185974
+Class 6 accuracy: 1.0
+Class 30 accuracy: 0.6000000238418579
+Class 32 accuracy: 0.8666667342185974
+Batch average accuracy: 1.0
+Class 12 accuracy: 1.0
+Class 8 accuracy: 1.0
+Class 24 accuracy: 1.0
+Class 20 accuracy: 1.0
+Class 2 accuracy: 1.0
+Batch average accuracy: 0.8666666746139526
+Class 6 accuracy: 1.0
+Class 29 accuracy: 0.5333333611488342
+Class 26 accuracy: 0.8000000715255737
+Class 25 accuracy: 1.0
+Class 21 accuracy: 1.0
+Batch average accuracy: 0.8533333539962769
+Class 29 accuracy: 0.46666669845581055
+Class 15 accuracy: 1.0
+Class 2 accuracy: 1.0
+Class 9 accuracy: 0.8000000715255737
+Class 36 accuracy: 1.0
+Batch average accuracy: 0.9200000166893005
+Class 2 accuracy: 0.9333333969116211
+Class 7 accuracy: 1.0
+Class 11 accuracy: 1.0
+Class 35 accuracy: 0.7333333492279053
+Class 34 accuracy: 0.9333333969116211
+Average test Acc = 90.16% +- 6.18%
+Class 0 Test Acc = 83.08% +- 10.33%
+Class 1 Test Acc = 87.06% +- 11.54%
+Class 2 Test Acc = 93.81% +- 10.53%
+Class 3 Test Acc = 90.59% +- 10.24%
+Class 4 Test Acc = 92.12% +- 10.57%
+Class 5 Test Acc = 91.82% +- 5.29%
+Class 6 Test Acc = 96.19% +- 10.30%
+Class 7 Test Acc = 99.17% +- 3.23%
+Class 8 Test Acc = 98.67% +- 4.99%
+Class 9 Test Acc = 92.78% +- 12.01%
+Class 10 Test Acc = 98.89% +- 2.48%
+Class 11 Test Acc = 97.22% +- 4.27%
+Class 12 Test Acc = 94.29% +- 14.00%
+Class 13 Test Acc = 97.14% +- 4.15%
+Class 14 Test Acc = 98.22% +- 5.14%
+Class 15 Test Acc = 96.89% +- 5.90%
+Class 16 Test Acc = 80.89% +- 14.37%
+Class 17 Test Acc = 91.11% +- 9.94%
+Class 18 Test Acc = 83.11% +- 11.38%
+Class 19 Test Acc = 91.33% +- 10.35%
+Class 20 Test Acc = 93.33% +- 7.70%
+Class 21 Test Acc = 90.56% +- 11.69%
+Class 22 Test Acc = 95.76% +- 6.53%
+Class 23 Test Acc = 96.36% +- 9.58%
+Class 24 Test Acc = 85.45% +- 12.00%
+Class 25 Test Acc = 99.52% +- 1.72%
+Class 26 Test Acc = 86.67% +- 8.82%
+Class 27 Test Acc = 94.22% +- 9.06%
+Class 28 Test Acc = 76.41% +- 19.85%
+Class 29 Test Acc = 72.73% +- 17.40%
+Class 30 Test Acc = 76.00% +- 11.23%
+Class 31 Test Acc = 89.58% +- 9.12%
+Class 32 Test Acc = 78.60% +- 17.38%
+Class 33 Test Acc = 57.78% +- 11.33%
+Class 34 Test Acc = 85.71% +- 15.91%
+Class 35 Test Acc = 87.62% +- 9.71%
+Class 36 Test Acc = 90.48% +- 14.41%
+Class 37 Test Acc = 90.00% +- 8.56%
+161858-20240606
