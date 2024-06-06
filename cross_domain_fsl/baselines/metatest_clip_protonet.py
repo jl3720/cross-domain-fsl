@@ -38,6 +38,7 @@ parser.add_argument(
 parser.add_argument("--n_support", type=int, default=5)
 parser.add_argument("--n_query", type=int, default=15)
 parser.add_argument("--n_way", type=int, default=5)
+parser.add_argument("--n_episode", type=int, default=1000)
 
 args = parser.parse_args()
 
@@ -99,7 +100,7 @@ def meta_test(model, datamgr):
         preds = classes[raw_preds]  # map to actual class indices
         acc = torch.sum(preds == y_query) / len(y_query)
         acc_all.append(acc)
-        print(f"Batch average accuracy: {acc.item()}")
+        print(f"Batch ({i}/n_episode) average accuracy: {acc.item()}")
 
         preds_by_class = preds.contiguous().view(model.n_way, model.n_query)
         y_query_by_class = y_query.contiguous().view(model.n_way, model.n_query)
@@ -146,6 +147,7 @@ def main(args: argparse.Namespace):
         n_way=args.n_way,
         n_query=args.n_query,
         n_support=args.n_support,
+        n_episode=args.n_episode,
     )
 
     protonet = ProtoNet(

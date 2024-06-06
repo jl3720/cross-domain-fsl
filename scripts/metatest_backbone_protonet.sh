@@ -17,6 +17,6 @@ python -u cross_domain_fsl/baselines/metatest_clip_protonet.py "$@"
 echo $(date +%H%M%S-%Y%m%d)
 
 # Organise the logs under date time
-new_dir="./logs/metatest_backbones/${time}"
+new_dir="./logs/metatest_backbones/clip_protonet/${time}"
 mkdir -p ${new_dir}
 mv ./logs/${SLURM_JOB_ID}.out ${new_dir}
