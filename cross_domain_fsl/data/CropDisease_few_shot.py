@@ -192,19 +192,19 @@ class SimpleDataManager(DataManager):
 
 
 class SetDataManager(DataManager):
-    def __init__(self, image_size, n_way=5, n_support=5, n_query=16, n_eposide=100):
+    def __init__(self, image_size, n_way=5, n_support=5, n_query=16, n_episode=100):
         super(SetDataManager, self).__init__()
         self.image_size = image_size
         self.n_way = n_way
         self.batch_size = n_support + n_query
-        self.n_eposide = n_eposide
+        self.n_episode = n_episode
 
         self.trans_loader = TransformLoader(image_size)
 
     def get_data_loader(self, aug):  # parameters that would change on train/val set
         transform = self.trans_loader.get_composed_transform(aug)
         dataset = SetDataset(self.batch_size, transform)
-        sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_eposide)
+        sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode)
         data_loader_params = dict(
             batch_sampler=sampler, num_workers=12, pin_memory=True
         )

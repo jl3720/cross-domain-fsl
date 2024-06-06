@@ -139,7 +139,7 @@ if __name__ == "__main__":
             n_query=n_query,
             n_way=params.test_n_way,
             n_support=params.n_shot,
-            n_eposide=iter_num,
+            n_episode=iter_num,
         )
         novel_loader = datamgr.get_data_loader(novel_file, aug=False)
 
@@ -147,25 +147,25 @@ if __name__ == "__main__":
         few_shot_params = dict(n_way=params.test_n_way, n_support=params.n_shot)
         if params.testset in ["ISIC"]:
             datamgr = ISIC_few_shot.SetDataManager(
-                image_size, n_eposide=iter_num, n_query=n_query, **few_shot_params
+                image_size, n_episode=iter_num, n_query=n_query, **few_shot_params
             )
             novel_loader = datamgr.get_data_loader(aug=False)
 
         elif params.testset in ["EuroSAT"]:
             datamgr = EuroSAT_few_shot.SetDataManager(
-                image_size, n_eposide=iter_num, n_query=n_query, **few_shot_params
+                image_size, n_episode=iter_num, n_query=n_query, **few_shot_params
             )
             novel_loader = datamgr.get_data_loader(aug=False)
 
         elif params.testset in ["CropDisease"]:
             datamgr = CropDisease_few_shot.SetDataManager(
-                image_size, n_eposide=iter_num, n_query=n_query, **few_shot_params
+                image_size, n_episode=iter_num, n_query=n_query, **few_shot_params
             )
             novel_loader = datamgr.get_data_loader(aug=False)
 
         elif params.testset in ["ChestX"]:
             datamgr = Chest_few_shot.SetDataManager(
-                image_size, n_eposide=iter_num, n_query=n_query, **few_shot_params
+                image_size, n_episode=iter_num, n_query=n_query, **few_shot_params
             )
             novel_loader = datamgr.get_data_loader(aug=False)
 

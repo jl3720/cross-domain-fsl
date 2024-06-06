@@ -199,13 +199,13 @@ class SetDataManager(DataManager):
         n_way=5,
         n_support=5,
         n_query=15,
-        n_eposide=100,
+        n_episode=100,
     ):
         super(SetDataManager, self).__init__()
         self.image_size = image_size
         self.n_way = n_way
         self.batch_size = n_support + n_query
-        self.n_eposide = n_eposide
+        self.n_episode = n_episode
 
         self.trans_loader = TransformLoader(image_size)
         self.transform = transform if transform else None
@@ -218,7 +218,8 @@ class SetDataManager(DataManager):
             transform = self.trans_loader.get_composed_transform(aug)
         print("transform: ", transform)
         dataset = SetDataset(self.batch_size, transform)
-        sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_eposide)
+        self.dataset = dataset  # expose access to the SetDataset
+        sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode)
         data_loader_params = dict(batch_sampler=sampler, num_workers=0, pin_memory=True)
         data_loader = torch.utils.data.DataLoader(dataset, **data_loader_params)
         return data_loader

@@ -144,12 +144,12 @@ class RandomLabeledTargetDataManager(DataManager):
 
 
 class SetDataManager(DataManager):
-    def __init__(self, image_size, n_way, n_support, n_query, n_eposide=100):
+    def __init__(self, image_size, n_way, n_support, n_query, n_episode=100):
         super(SetDataManager, self).__init__()
         self.image_size = image_size
         self.n_way = n_way
         self.batch_size = n_support + n_query
-        self.n_eposide = n_eposide
+        self.n_episode = n_episode
 
         self.trans_loader = TransformLoader(image_size)
         # print('datamgr:', 'SetDataManager:', 'n_way:', self.n_way, 'batch_size:', self.batch_size)
@@ -161,11 +161,11 @@ class SetDataManager(DataManager):
         if isinstance(data_file, list):
             dataset = MultiSetDataset(data_file, self.batch_size, transform)
             sampler = MultiEpisodicBatchSampler(
-                dataset.lens(), self.n_way, self.n_eposide
+                dataset.lens(), self.n_way, self.n_episode
             )
         else:
             dataset = SetDataset(data_file, self.batch_size, transform)
-            sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_eposide)
+            sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode)
         data_loader_params = dict(batch_sampler=sampler, num_workers=4)
         data_loader = torch.utils.data.DataLoader(dataset, **data_loader_params)
         return data_loader
@@ -175,12 +175,12 @@ class SetDataManager(DataManager):
 
 # added in 20210109
 class RandomLabeledTargetSetDataManager(DataManager):
-  def __init__(self, image_size, n_way, n_support, n_query, n_eposide=100):
+  def __init__(self, image_size, n_way, n_support, n_query, n_episode=100):
     super(RandomLabeledTargetSetDataManager, self).__init__()
     self.image_size = image_size
     self.n_way = n_way
     self.batch_size = n_support + n_query
-    self.n_eposide = n_eposide
+    self.n_episode = n_episode
 
     self.trans_loader = TransformLoader(image_size)
 
@@ -188,10 +188,10 @@ class RandomLabeledTargetSetDataManager(DataManager):
     transform = self.trans_loader.get_composed_transform(aug)
     if isinstance(data_file, list):
       dataset = MultiSetDataset( data_file , self.batch_size, transform )
-      sampler = MultiEpisodicBatchSampler(dataset.lens(), self.n_way, self.n_eposide )
+      sampler = MultiEpisodicBatchSampler(dataset.lens(), self.n_way, self.n_episode )
     else:
       dataset = SetDataset( data_file , self.batch_size, transform )
-      sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_eposide )
+      sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode )
     data_loader_params = dict(batch_sampler = sampler,  num_workers=4)
     data_loader = torch.utils.data.DataLoader(dataset, **data_loader_params)
     return data_loader
