@@ -100,7 +100,7 @@ def meta_test(model, datamgr):
         preds = classes[raw_preds]  # map to actual class indices
         acc = torch.sum(preds == y_query) / len(y_query)
         acc_all.append(acc)
-        print(f"Batch ({i}/n_episode) average accuracy: {acc.item()}")
+        print(f"Batch ({i}/{n_episode}) average accuracy: {acc.item()}")
 
         preds_by_class = preds.contiguous().view(model.n_way, model.n_query)
         y_query_by_class = y_query.contiguous().view(model.n_way, model.n_query)
