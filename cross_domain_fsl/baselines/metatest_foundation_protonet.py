@@ -16,13 +16,12 @@ from functools import partial
 
 # from cross_domain_fsl.methods.backbone_multiblock import model_dict
 from cross_domain_fsl.methods.protonet import ProtoNet
-
-# from cross_domain_fsl.data.datamgr import SetDataManager
+from cross_domain_fsl.methods.foundation_models import FOUNDATION_MODELS
 from cross_domain_fsl.data.managers import MANAGER_DICT
 
 # the finetuning is very sensitive to lr
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-IMAGE_SIZE = 224
+IMAGE_SIZE = (224, 224)  # Force square images
 CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1024}
 
 parser = argparse.ArgumentParser()
@@ -36,7 +35,8 @@ parser.add_argument(
     "--foundation_model",
     type=str,
     default="CLIP",
-    help="Foundation model to adapt. Options: {'CLIP', 'DINOv2', 'Vim'}",
+    help="Foundation model to adapt.\
+        Options (Case sensitive): {'CLIP', 'DINOv2', 'Vim'}",
 )
 parser.add_argument(
     "--vision_variant", type=str, default="ViT-B/32", help="Vision backbone variant"
@@ -47,28 +47,6 @@ parser.add_argument("--n_way", type=int, default=5)
 parser.add_argument("--n_episode", type=int, default=1000)
 
 args = parser.parse_args()
-
-
-class CLIP(nn.Module):
-    def __init__(self, vision_variant="ViT-B/32"):
-        super(CLIP, self).__init__()
-        model, preprocess = clip.load(vision_variant, DEVICE)
-
-        self.transform = preprocess
-
-        # Freeze CLIP backbone
-        for param in model.parameters():
-            param.requires_grad = False
-
-        self.model = model
-
-        self.final_feat_dim = CLIP_DIM_MAPPING[vision_variant]
-
-    def forward(self, x):
-        # x = self.transform(x)  # SetDataLoader yields transformed images
-        # TODO: Note that clip usually normalises images
-        x = self.model.encode_image(x)
-        return x
 
 
 def foundation_model_wrapper(foundation_model: nn.Module, **kwargs):
@@ -141,7 +119,7 @@ def meta_test(model, datamgr):
 
 def main(args: argparse.Namespace):
 
-    foundation_model = CLIP(vision_variant=args.vision_variant).to(DEVICE)
+    foundation_model = FOUNDATION_MODELS[args.foundation_model](args.vision_variant)
     transform = foundation_model.transform
     model_func = partial(foundation_model_wrapper, foundation_model=foundation_model)
     # print(model_func)
