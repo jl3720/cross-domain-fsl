@@ -190,7 +190,7 @@ class TransformLoader:
             return method(self.image_size)
         elif transform_type == "CenterCrop":
             return method(self.image_size)
-        elif transform_type == "Scale":
+        elif transform_type == "Resize":
             return method([int(self.image_size * 1.15), int(self.image_size * 1.15)])
         elif transform_type == "Normalize":
             return method(**self.normalize_param)
@@ -207,7 +207,7 @@ class TransformLoader:
                 "Normalize",
             ]
         else:
-            transform_list = ["Scale", "CenterCrop", "ToTensor", "Normalize"]
+            transform_list = ["Resize", "CenterCrop", "ToTensor", "Normalize"]
 
         transform_funcs = [self.parse_transform(x) for x in transform_list]
         transform = transforms.Compose(transform_funcs)
@@ -258,10 +258,12 @@ class SetDataManager(DataManager):
         self.transform = transform if transform else None
 
     def get_data_loader(self, aug):  # parameters that would change on train/val set
+        print("self.transform: ", self.transform)
         if self.transform:
             transform = self.transform
         else:
             transform = self.trans_loader.get_composed_transform(aug)
+        print("transform: ", transform)
         dataset = SetDataset(self.batch_size, transform)
         self.dataset = dataset
         sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode)
