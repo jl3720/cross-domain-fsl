@@ -33,10 +33,16 @@ parser.add_argument(
     help="Valid options: {'EuroSAT', 'CropDisease', 'ISIC', 'ChestX'}",
 )
 parser.add_argument(
-    "--vision_model", type=str, default="ViT-B/32", help="CLIP Vision backbone"
+    "--foundation_model",
+    type=str,
+    default="CLIP",
+    help="Foundation model to adapt. Options: {'CLIP', 'DINOv2', 'Vim'}",
+)
+parser.add_argument(
+    "--vision_variant", type=str, default="ViT-B/32", help="Vision backbone variant"
 )
 parser.add_argument("--n_support", type=int, default=5)
-parser.add_argument("--n_query", type=int, default=15)
+parser.add_argument("--n_query", type=int, default=16)
 parser.add_argument("--n_way", type=int, default=5)
 parser.add_argument("--n_episode", type=int, default=1000)
 
@@ -44,9 +50,9 @@ args = parser.parse_args()
 
 
 class CLIP(nn.Module):
-    def __init__(self, vision_model="ViT-B/32"):
+    def __init__(self, vision_variant="ViT-B/32"):
         super(CLIP, self).__init__()
-        model, preprocess = clip.load(vision_model, DEVICE)
+        model, preprocess = clip.load(vision_variant, DEVICE)
 
         self.transform = preprocess
 
@@ -56,7 +62,7 @@ class CLIP(nn.Module):
 
         self.model = model
 
-        self.final_feat_dim = CLIP_DIM_MAPPING[vision_model]
+        self.final_feat_dim = CLIP_DIM_MAPPING[vision_variant]
 
     def forward(self, x):
         # x = self.transform(x)  # SetDataLoader yields transformed images
@@ -65,9 +71,9 @@ class CLIP(nn.Module):
         return x
 
 
-def clip_wrapper(backbone: nn.Module, **kwargs):
-    """Wrap CLIP backbone for a ProtoNet model"""
-    return backbone
+def foundation_model_wrapper(foundation_model: nn.Module, **kwargs):
+    """Wrap foundation model backbone for a `ProtoNet` module"""
+    return foundation_model
 
 
 def meta_test(model, datamgr):
@@ -135,9 +141,9 @@ def meta_test(model, datamgr):
 
 def main(args: argparse.Namespace):
 
-    clip_backbone = CLIP(vision_model=args.vision_model).to(DEVICE)
-    transform = clip_backbone.transform
-    model_func = partial(clip_wrapper, backbone=clip_backbone)
+    foundation_model = CLIP(vision_variant=args.vision_variant).to(DEVICE)
+    transform = foundation_model.transform
+    model_func = partial(foundation_model_wrapper, foundation_model=foundation_model)
     # print(model_func)
 
     mgr_cls = MANAGER_DICT[args.dataset]
