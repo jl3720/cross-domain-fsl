@@ -21,7 +21,8 @@ import cross_domain_fsl.data.additional_transforms as add_transforms
 
 # from configs import *
 # from config_bscdfsl_dir import *
-ChestX_path = "/scratch_net/biwidl309/jamliu/code/datasets/ChestX"
+# ChestX_path = "/scratch_net/biwidl309/jamliu/code/datasets/ChestX"
+ChestX_path = "/cluster/work/cvl/jamliu/data/ChestX"
 # TODO: fix structure of dataset
 
 

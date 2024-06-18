@@ -21,7 +21,8 @@ import sys
 sys.path.append("../")
 # from configs import *
 # from config_bscdfsl_dir import *
-CropDisease_path = "/scratch_net/biwidl309/jamliu/code/datasets/CropDisease"
+# CropDisease_path = "/scratch_net/biwidl309/jamliu/code/datasets/CropDisease"
+CropDisease_path = "/cluster/work/cvl/jamliu/data/CropDisease"
 
 identity = lambda x: x
 

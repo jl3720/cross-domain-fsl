@@ -20,7 +20,8 @@ import sys
 sys.path.append("../")
 # from configs import *
 # from config_bscdfsl_dir import *
-ISIC_path = "/scratch_net/biwidl309/jamliu/code/datasets/ISIC2018"
+# ISIC_path = "/scratch_net/biwidl309/jamliu/code/datasets/ISIC2018"
+ISIC_path = "/cluster/work/cvl/jamliu/data/ISIC2018"
 
 
 class CustomDatasetFromImages(Dataset):
