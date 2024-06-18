@@ -4,7 +4,9 @@ import torch
 import torch.nn as nn
 from functools import partial
 from torch import Tensor
+from huggingface_hub import snapshot_download   
 from typing import Optional
+from pathlib import Path
 
 from timm.models.vision_transformer import VisionTransformer, _cfg
 from timm.models.registry import register_model
@@ -34,7 +36,11 @@ __all__ = [
     'vim_tiny_patch16_224', 'vim_small_patch16_224', 'vim_base_patch16_224',
     'vim_tiny_patch16_384', 'vim_small_patch16_384', 'vim_base_patch16_384',
 ]
+VIM_TINY_REPO = "hustvl/Vim-tiny-midclstok"
+VIM_SMALL_REPO = "hustvl/Vim-small-midclstok"
 
+# Paths to Vim checkpoints
+VIM_T_76 = Path("./vim/checkpoints/vim_t_midclstok_76p1acc.pth")
 
 class PatchEmbed(nn.Module):
     """ 2D Image to Patch Embedding
@@ -546,6 +552,9 @@ class VisionMamba(nn.Module):
             x = x.max(dim=1)[0]
         return x
 
+# Attempt to download the checkpoints from huggingface hub
+PRETRAINED_TINY_DIR = snapshot_download(repo_id=VIM_TINY_REPO)
+PRETRAINED_SMALL_DIR = snapshot_download(repo_id=VIM_SMALL_REPO)
 
 @register_model
 def vim_tiny_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok_div2(pretrained=False, **kwargs):
@@ -553,10 +562,8 @@ def vim_tiny_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok_
         patch_size=16, embed_dim=192, depth=24, rms_norm=True, residual_in_fp32=True, fused_add_norm=True, final_pool_type='mean', if_abs_pos_embed=True, if_rope=False, if_rope_residual=False, bimamba_type="v2", if_cls_token=True, if_devide_out=True, use_middle_cls_token=True, **kwargs)
     model.default_cfg = _cfg()
     if pretrained:
-        checkpoint = torch.hub.load_state_dict_from_url(
-            url="to.do",
-            map_location="cpu", check_hash=True
-        )
+        model_file = Path(PRETRAINED_TINY_DIR, "vim_t_midclstok_76p1acc.pth")  # not the finer granualarity
+        checkpoint = torch.load(str(model_file))
         model.load_state_dict(checkpoint["model"])
     return model
 
@@ -579,10 +586,8 @@ def vim_small_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok
         patch_size=16, embed_dim=384, depth=24, rms_norm=True, residual_in_fp32=True, fused_add_norm=True, final_pool_type='mean', if_abs_pos_embed=True, if_rope=False, if_rope_residual=False, bimamba_type="v2", if_cls_token=True, if_devide_out=True, use_middle_cls_token=True, **kwargs)
     model.default_cfg = _cfg()
     if pretrained:
-        checkpoint = torch.hub.load_state_dict_from_url(
-            url="to.do",
-            map_location="cpu", check_hash=True
-        )
+        model_file = Path(PRETRAINED_SMALL_DIR, "vim_s_midclstok_80p5acc.pth")  # not the finer granualarity
+        checkpoint = torch.load(str(model_file))
         model.load_state_dict(checkpoint["model"])
     return model
 
