@@ -7,6 +7,25 @@ Repository for the CVPR-2023 paper : StyleAdv: Meta Style Adversarial Training f
 
 
 # 2 Setup 
+## 2.1 venv & code
+- For Euler / Slurm machines, uses `module` loading and `conda` isn't available.
+- Vim requires Python 3.10 and CUDA 11.6+.
+```
+module load python/3.10.4
+module load cuda/11.8.0
+module remove cudnn  # hack to ensure cudnn shipped with pytorch is used
+python -V
+
+# Create venv
+python -m venv PATH/TO/VENV
+source PATH/TO/VENV/bin/activate
+```
+- Follow the [readme](Vim/README.md) for the Vim dependencies setup.
+- Then install `cross-domain-fsl` as editable package:
+```
+pip install -e cross-domain-fsl/
+```
+
 ## 2.1 conda env & code
 ```
 # conda env
