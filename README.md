@@ -23,7 +23,7 @@ source PATH/TO/VENV/bin/activate
 - Follow the [readme](Vim/README.md) for the Vim dependencies setup.
 - Then install `cross-domain-fsl` as editable package:
 ```
-pip install -e cross-domain-fsl/
+pip install -e .  # in code/cross-domain-fsl/
 ```
 
 ## 2.1 conda env & code
