@@ -1,0 +1,4 @@
+h5py>=2.9.0
+tensorboardX>=1.4
+ml-collections
+clip @ git+https://github.com/openai/CLIP.git

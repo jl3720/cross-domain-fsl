@@ -3,6 +3,7 @@
 import argparse
 import os
 import random
+import time
 import numpy as np
 
 import torch
@@ -55,7 +56,10 @@ def foundation_model_wrapper(foundation_model: nn.Module, **kwargs):
 
 
 def meta_test(model, datamgr):
+    t0 = time.time()
     test_dataloader = datamgr.get_data_loader(aug=False)
+    t1 = time.time()
+    print(f"Time to init Dataloader: {t1 - t0}")
 
     n_classes = len(datamgr.dataset.sub_meta)  # Bit hacky
     n_episode = datamgr.n_episode
@@ -65,9 +69,11 @@ def meta_test(model, datamgr):
     # Mask for classes that appear in episode
     classes_mask = torch.zeros(n_classes, n_episode)
 
+    time_list = []
     model.eval()
     for i, (x, y) in enumerate(test_dataloader):
         # x, y = next(iter(test_dataloader))
+        t0 = time.time()
         x = x.to(DEVICE)
         y = y.to(DEVICE)
 
@@ -82,6 +88,7 @@ def meta_test(model, datamgr):
         # raw_preds are indices of selected subset of classes
         raw_preds = nn.functional.softmax(scores, dim=1).argmax(1)
         preds = classes[raw_preds]  # map to actual class indices
+        time_list.append(time.time() - t0)
         acc = torch.sum(preds == y_query) / len(y_query)
         acc_all.append(acc)
         print(f"Batch ({i}/{n_episode}) average accuracy: {acc.item()}")
@@ -114,6 +121,8 @@ def meta_test(model, datamgr):
             "Class %d Test Acc = %4.2f%% +- %4.2f%%"
             % (i, class_acc_mean[i] * 100, class_acc_std[i] * 100)
         )
+    time_mean = np.mean(time_list)
+    print(f"Average time per episode: {time_mean}")
     return acc_mean, acc_std
 
 
