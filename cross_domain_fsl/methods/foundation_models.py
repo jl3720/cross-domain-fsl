@@ -49,6 +49,33 @@ class FoundationModel(nn.Module):
         pass
 
 
+class FoundationFC(nn.Module):
+    """Abstract class for Foundation Models with Fully Connected Adapter."""
+
+    @abstractmethod
+    def __init__(self, vision_variant: str, n_way: int):
+        """Abstract __init__ method for FoundationModels.
+        Required args:
+            vision_variant (str): Vision backbone variant, e.g. 'ViT-B/32'.
+            n_way (int): Number of classes for linear probe.
+        """
+        super(FoundationFC, self).__init__()
+
+        # Must set these attributes in child class
+        self.transform = None
+
+    @abstractmethod
+    def forward(self, x):
+        """
+        Args:
+            x (torch.Tensor): Input image tensor. Expected (B, C, H, W).
+                              C = 3, H = W = 224.
+        Returns:
+            torch.Tensor: Class logits. Shape (B, n_qway).
+        """
+        pass
+
+
 class CLIP(FoundationModel):
     def __init__(self, vision_variant="ViT-B/32"):
         super(CLIP, self).__init__(vision_variant)
@@ -68,6 +95,36 @@ class CLIP(FoundationModel):
         # x = self.transform(x)  # SetDataLoader yields transformed images
         # TODO: Note that clip usually normalises images
         x = self.model.encode_image(x)
+        return x
+
+
+class CLIP_FC(FoundationFC):
+    """CLIP model with a fully connected layer for fine-tuning.
+
+    I.e. Linear probe.
+    """
+
+    def __init__(self, vision_variant="ViT-B/32", n_way=5):
+        super(CLIP_FC, self).__init__(vision_variant, n_way)
+        model, preprocess = clip.load(vision_variant, DEVICE)
+
+        self.transform = preprocess
+
+        # Freeze CLIP backbone
+        for param in model.parameters():
+            param.requires_grad = False
+
+        self.model = model
+        self.fc = nn.Linear(CLIP_DIM_MAPPING[vision_variant], n_way).half()
+
+        self.final_feat_dim = CLIP_DIM_MAPPING[vision_variant]
+
+    def forward(self, x):
+        # x = self.transform(x)  # SetDataLoader yields transformed images
+        # TODO: Experiment with ReLU and/or BatchNorm
+        self.model.eval()
+        x = self.model.encode_image(x)
+        x = self.fc(x)
         return x
 
 
@@ -103,4 +160,5 @@ class DINOv2(FoundationModel):
         return x
 
 
-FOUNDATION_MODELS: dict[str, FoundationModel] = {"CLIP": CLIP, "DINOv2": DINOv2}
+FOUNDATION_MODELS = {"CLIP": CLIP, "DINOv2": DINOv2}
+FOUNDATION_FC_MODELS = {"CLIP": CLIP_FC}
