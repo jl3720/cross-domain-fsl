@@ -116,6 +116,7 @@ class CLIP_FC(FoundationFC):
 
         self.model = model
         self.fc = nn.Linear(CLIP_DIM_MAPPING[vision_variant], n_way).half()
+        self.norm = nn.BatchNorm1d(n_way).half()
 
         self.final_feat_dim = CLIP_DIM_MAPPING[vision_variant]
 
@@ -125,6 +126,21 @@ class CLIP_FC(FoundationFC):
         self.model.eval()
         x = self.model.encode_image(x)
         x = self.fc(x)
+        x = self.norm(x)
+        return x
+
+
+class FC(nn.Module):
+    """Fully connected layer for fine-tuning."""
+
+    def __init__(self, in_dim, out_dim):
+        super(FC, self).__init__()
+        self.fc = nn.Linear(in_dim, out_dim)
+        self.norm = nn.BatchNorm1d(out_dim)
+
+    def forward(self, x):
+        x = self.fc(x)
+        x = self.norm(x)
         return x
 
 
