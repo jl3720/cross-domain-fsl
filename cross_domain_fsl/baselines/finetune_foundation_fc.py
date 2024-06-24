@@ -96,7 +96,7 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
         x = x.to(DEVICE)
         y = y.to(DEVICE)  # global label ids
 
-        print(f"y: {y}")
+        # print(f"y: {y}")
         pdb.set_trace(header="x, y loaded")
 
         n_way = args.n_way
@@ -137,7 +137,7 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
                 aug_support.view(n_way * n_aug, *aug_support.shape[2:])
             )
             support_scores = fc(support_features.float())
-            print(f"support_scores: {support_scores.shape}\n{support_scores}")
+            # print(f"support_scores: {support_scores.shape}\n{support_scores}")
             # y: (n_way) -> (n_way, n_support) -> (n_way * n_support)
             # Use local label ids for backprop
             # y_support = (
@@ -154,10 +154,10 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
                 .reshape(-1)
                 .to(DEVICE)
             )
-            print(f"y_support: {y_support.shape}")
+            # print(f"y_support: {y_support.shape}")
             pdb.set_trace(header="Support scores computed")
 
-            # Backward pass. TODO: Multiple epochs of fine tuning on support set?
+            # Backward pass
             loss_val = criterion(support_scores, y_support)
             optimizer.zero_grad()
             loss_val.backward()
@@ -165,8 +165,8 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
 
             with torch.no_grad():
                 support_preds = nn.functional.softmax(support_scores, dim=-1).argmax(-1)
-                print(f"softmax: {nn.functional.softmax(support_scores, dim=-1)}")
-                print(f"support_preds: {support_preds}")
+                # print(f"softmax: {nn.functional.softmax(support_scores, dim=-1)}")
+                # print(f"support_preds: {support_preds}")
                 support_acc = torch.sum(support_preds == y_support) / len(y_support)
                 support_acc_all.append(support_acc)
                 print(
@@ -177,9 +177,12 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
         with torch.no_grad():
             # Evaluate on query set
             y_query = y[:, n_support:].contiguous().view(-1)
-            print(f"y_query: {y_query.shape}")
+            # print(f"y_query: {y_query.shape}")
 
-            query_scores = fc(x_query.view(n_way * n_query, *x_query.shape[2:]))
+            query_features = foundation_model(
+                x_query.view(n_way * n_query, *x_query.shape[2:])
+            )
+            query_scores = fc(query_features.float())
 
             # raw_preds are indices of selected subset of classes
             raw_preds = nn.functional.softmax(query_scores, dim=-1).argmax(-1)
