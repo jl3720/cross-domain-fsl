@@ -27,7 +27,7 @@ from cross_domain_fsl.utils.PSG import PseudoSampleGenerator
 # the finetuning is very sensitive to lr
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 IMAGE_SIZE = (224, 224)  # Force square images
-CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1024}
+# CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1024}
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -79,7 +79,8 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
     classes_mask = torch.zeros(n_classes, n_episode)
 
     criterion = nn.CrossEntropyLoss()
-    fc = FC(CLIP_DIM_MAPPING[args.vision_variant], args.n_way).to(DEVICE)
+    final_feat_dim = foundation_model.final_feat_dim
+    fc = FC(final_feat_dim, args.n_way).to(DEVICE)
     state_dict = deepcopy(fc.state_dict())  # Save initial state, mutable?
     del fc
 
@@ -89,7 +90,7 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
 
     time_list = []
     # model.eval()
-    foundation_model.eval()
+    foundation_model.to(DEVICE).eval()
     for i, (x, y) in enumerate(test_dataloader):
         # x, y = next(iter(test_dataloader))
         t0 = time.time()
@@ -118,7 +119,7 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
         # Train on support set
 
         # Each episode, we need to reinitialize the model
-        fc = FC(CLIP_DIM_MAPPING[args.vision_variant], args.n_way).to(DEVICE)
+        fc = FC(final_feat_dim, args.n_way).to(DEVICE)
         fc.load_state_dict(state_dict)
         optimizer = torch.optim.Adam(fc.parameters(), lr=args.lr)
 
