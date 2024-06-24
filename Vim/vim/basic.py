@@ -4,8 +4,8 @@ import torch
 # from timm.models.vision_transformer import _cfg
 from pathlib import Path
 
-from models_mamba import VisionMamba
-from models_mamba import vim_tiny_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok_div2 as vim_t
+from vim.models_mamba import VisionMamba
+from vim.models_mamba import vim_tiny_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok_div2 as vim_t
 # TODO: Add checkpoints to repo or instructions.
 # VIM_T_76 = Path("./vim/checkpoints/vim_t_midclstok_76p1acc.pth")
 # VIM_T_FT_78 = Path("./vim/checkpoints/vim_t_midclstok_ft_78p3acc.pth")
@@ -26,7 +26,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #     return model
 
 def main():
-    model = vim_t(pretrained=True)
+    model = vim_t(pretrained=True).to(device)
     model.eval()
     print("Model loaded successfully")
     print(model)

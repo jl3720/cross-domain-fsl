@@ -13,8 +13,8 @@ import timm
 from timm.data import Mixup
 from timm.utils import accuracy, ModelEma
 
-from losses import DistillationLoss
-import utils
+from vim.losses import DistillationLoss
+import vim.utils
 
 
 def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
@@ -23,8 +23,8 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
                     model_ema: Optional[ModelEma] = None, mixup_fn: Optional[Mixup] = None,
                     set_training_mode=True, args = None):
     model.train(set_training_mode)
-    metric_logger = utils.MetricLogger(delimiter="  ")
-    metric_logger.add_meter('lr', utils.SmoothedValue(window_size=1, fmt='{value:.6f}'))
+    metric_logger = vim.utils.MetricLogger(delimiter="  ")
+    metric_logger.add_meter('lr', vim.utils.SmoothedValue(window_size=1, fmt='{value:.6f}'))
     header = 'Epoch: [{}]'.format(epoch)
     print_freq = 10
     
@@ -105,7 +105,7 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
 def evaluate(data_loader, model, device, amp_autocast):
     criterion = torch.nn.CrossEntropyLoss()
 
-    metric_logger = utils.MetricLogger(delimiter="  ")
+    metric_logger = vim.utils.MetricLogger(delimiter="  ")
     header = 'Test:'
 
     # switch to evaluation mode

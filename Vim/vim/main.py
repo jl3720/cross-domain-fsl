@@ -25,9 +25,9 @@ from augment import new_data_aug_generator
 
 from contextlib import suppress
 
-import models_mamba
+import vim.models_mamba
 
-import utils
+import vim.utils
 
 # log about
 import mlflow
@@ -220,7 +220,7 @@ def get_args_parser():
 
 
 def main(args):
-    utils.init_distributed_mode(args)
+    vim.utils.init_distributed_mode(args)
 
     print(args)
 
@@ -230,7 +230,7 @@ def main(args):
     device = torch.device(args.device)
 
     # fix the seed for reproducibility
-    seed = args.seed + utils.get_rank()
+    seed = args.seed + vim.utils.get_rank()
     torch.manual_seed(seed)
     np.random.seed(seed)
     # random.seed(seed)
@@ -248,8 +248,8 @@ def main(args):
     dataset_val, _ = build_dataset(is_train=False, args=args)
 
     if args.distributed:
-        num_tasks = utils.get_world_size()
-        global_rank = utils.get_rank()
+        num_tasks = vim.utils.get_world_size()
+        global_rank = vim.utils.get_rank()
         if args.repeated_aug:
             sampler_train = RASampler(
                 dataset_train, num_replicas=num_tasks, rank=global_rank, shuffle=True
@@ -386,7 +386,7 @@ def main(args):
     print('number of params:', n_parameters)
 
     if not args.unscale_lr:
-        linear_scaled_lr = args.lr * args.batch_size * utils.get_world_size() / 512.0
+        linear_scaled_lr = args.lr * args.batch_size * vim.utils.get_world_size() / 512.0
         args.lr = linear_scaled_lr
     optimizer = create_optimizer(args, model_without_ddp)
     
@@ -450,7 +450,7 @@ def main(args):
             lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
             args.start_epoch = checkpoint['epoch'] + 1
             if args.model_ema:
-                utils._load_checkpoint_for_ema(model_ema, checkpoint['model_ema'])
+                vim.utils._load_checkpoint_for_ema(model_ema, checkpoint['model_ema'])
             if 'scaler' in checkpoint and args.if_amp: # change loss_scaler if not amp
                 loss_scaler.load_state_dict(checkpoint['scaler'])
             elif 'scaler' in checkpoint and not args.if_amp:
@@ -485,7 +485,7 @@ def main(args):
         if args.output_dir:
             checkpoint_paths = [output_dir / 'checkpoint.pth']
             for checkpoint_path in checkpoint_paths:
-                utils.save_on_master({
+                vim.utils.save_on_master({
                     'model': model_without_ddp.state_dict(),
                     'optimizer': optimizer.state_dict(),
                     'lr_scheduler': lr_scheduler.state_dict(),
@@ -504,7 +504,7 @@ def main(args):
             if args.output_dir:
                 checkpoint_paths = [output_dir / 'best_checkpoint.pth']
                 for checkpoint_path in checkpoint_paths:
-                    utils.save_on_master({
+                    vim.utils.save_on_master({
                         'model': model_without_ddp.state_dict(),
                         'optimizer': optimizer.state_dict(),
                         'lr_scheduler': lr_scheduler.state_dict(),
@@ -527,7 +527,7 @@ def main(args):
                 mlflow.log_metric(key, value, log_stats['epoch'])
         
         
-        if args.output_dir and utils.is_main_process():
+        if args.output_dir and vim.utils.is_main_process():
             with (output_dir / "log.txt").open("a") as f:
                 f.write(json.dumps(log_stats) + "\n")
 
