@@ -8,8 +8,12 @@ import clip
 
 from abc import abstractmethod
 
+from vim.models_mamba import vim_tiny_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok_div2 as vim_tiny
+from vim.models_mamba import vim_small_patch16_224_bimambav2_final_pool_mean_abs_pos_embed_with_midclstok_div2 as vim_small
+
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 IMAGE_SIZE = (224, 224)  # Force square images
+
 CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1024}
 DINOV2_DIM_MAPPING = {
     "dinov2_vits14": 384,
@@ -17,6 +21,11 @@ DINOV2_DIM_MAPPING = {
     "dinov2_vitl14": 1024,
     "dinov2_vitg14": 1536,
 }
+VIM_DIM_MAPPING = {"vim_tiny": 192, "vim_small": 384}
+
+
+IMAGENET_DEFAULT_MEAN = (0.485, 0.456, 0.406)
+IMAGENET_DEFAULT_STD = (0.229, 0.224, 0.225)
 
 
 class FoundationModel(nn.Module):
@@ -149,9 +158,6 @@ class DINOv2(FoundationModel):
         super(DINOv2, self).__init__(vision_variant)
         model = torch.hub.load("facebookresearch/dinov2", vision_variant)
 
-        IMAGENET_DEFAULT_MEAN = (0.485, 0.456, 0.406)
-        IMAGENET_DEFAULT_STD = (0.229, 0.224, 0.225)
-
         # Hard code transform for DINOv2
         self.transform = T.Compose(
             [
@@ -175,6 +181,31 @@ class DINOv2(FoundationModel):
         x = self.model(x)
         return x
 
+class Vim(FoundationModel):
+    def __init__(self, vision_variant: str="vim_tiny"):
+        super().__init__(vision_variant)
+        vision_variant = vision_variant.lower()
+        if vision_variant == "vim_tiny":
+            model = vim_tiny(pretrained=True)
+        elif vision_variant == "vim_small":
+            model = vim_small(pretrained=True)
+        else:
+            raise ValueError(f"Invalid vision_variant: {vision_variant}\
+                             . Must be one of ['vim_tiny', 'vim_small']")
+        
+        for param in model.parameters():
+            param.requires_grad = False
+        
+        self.model = model
+        self.transform = T.Compose([
+            T.Resize(IMAGE_SIZE),
+            T.ToTensor(),
+            T.Normalize(mean=IMAGENET_DEFAULT_MEAN, std=IMAGENET_DEFAULT_STD)  # ImageNet defaults
+        ])
+        self.final_feat_dim = 192  # TODO: hard code for now
+    
+    def forward(self, x):
+        return self.model(x, return_features=True)
 
-FOUNDATION_MODELS = {"CLIP": CLIP, "DINOv2": DINOv2}
-FOUNDATION_FC_MODELS = {"CLIP": CLIP_FC}
+
+FOUNDATION_MODELS: dict[str, FoundationModel] = {"CLIP": CLIP, "DINOv2": DINOv2, "Vim": Vim}

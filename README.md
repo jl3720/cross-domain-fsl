@@ -21,6 +21,10 @@ python -m venv PATH/TO/VENV
 source PATH/TO/VENV/bin/activate
 ```
 - Follow the [readme](Vim/README.md) for the Vim dependencies setup.
+```
+cd Vim
+... # follow the readme
+```
 - Then install `cross-domain-fsl` as editable package:
 ```
 pip install -e .  # in code/cross-domain-fsl/
