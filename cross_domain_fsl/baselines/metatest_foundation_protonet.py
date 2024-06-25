@@ -46,6 +46,7 @@ parser.add_argument("--n_support", type=int, default=5)
 parser.add_argument("--n_query", type=int, default=16)
 parser.add_argument("--n_way", type=int, default=5)
 parser.add_argument("--n_episode", type=int, default=1000)
+parser.add_argument("--num_workers", type=int, default=8)
 
 args = parser.parse_args()
 

@@ -302,12 +302,14 @@ class SetDataManager(DataManager):
         n_support=5,
         n_query=16,
         n_episode=100,
+        num_workers=4,
     ):
         super(SetDataManager, self).__init__()
         self.image_size = image_size
         self.n_way = n_way
         self.batch_size = n_support + n_query
         self.n_episode = n_episode
+        self.num_workers = num_workers
 
         self.trans_loader = TransformLoader(image_size)
         self.transform = transform if transform else None
@@ -320,7 +322,7 @@ class SetDataManager(DataManager):
         dataset = SetDataset(self.batch_size, transform)
         self.dataset = dataset
         sampler = EpisodicBatchSampler(len(dataset), self.n_way, self.n_episode)
-        data_loader_params = dict(batch_sampler=sampler, num_workers=0, pin_memory=True)
+        data_loader_params = dict(batch_sampler=sampler, num_workers=self.num_workers, pin_memory=True)
         data_loader = torch.utils.data.DataLoader(dataset, **data_loader_params)
         return data_loader
 

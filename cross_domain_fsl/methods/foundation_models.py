@@ -202,7 +202,7 @@ class Vim(FoundationModel):
             T.ToTensor(),
             T.Normalize(mean=IMAGENET_DEFAULT_MEAN, std=IMAGENET_DEFAULT_STD)  # ImageNet defaults
         ])
-        self.final_feat_dim = 192  # TODO: hard code for now
+        self.final_feat_dim = VIM_DIM_MAPPING[vision_variant]  # TODO: hard code for now
     
     def forward(self, x):
         return self.model(x, return_features=True)
