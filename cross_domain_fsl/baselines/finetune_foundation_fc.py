@@ -20,7 +20,8 @@ from copy import deepcopy
 
 # from cross_domain_fsl.methods.backbone_multiblock import model_dict
 from cross_domain_fsl.methods.protonet import ProtoNet
-from cross_domain_fsl.methods.foundation_models import FOUNDATION_MODELS, FC
+from cross_domain_fsl.methods.foundation_models import FOUNDATION_MODELS
+from cross_domain_fsl.methods.adapters import ADAPTERS
 from cross_domain_fsl.data.managers import MANAGER_DICT
 from cross_domain_fsl.utils.PSG import PseudoSampleGenerator
 
@@ -46,6 +47,7 @@ parser.add_argument(
 parser.add_argument(
     "--vision_variant", type=str, default="ViT-B/32", help="Vision backbone variant"
 )
+parser.add_argument("--adapter", type=str, default="FC", help="Adapter type")
 parser.add_argument("--lr", type=float, default=0.005)
 parser.add_argument("--n_support", type=int, default=5)
 parser.add_argument("--n_query", type=int, default=16)
@@ -80,9 +82,9 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
 
     criterion = nn.CrossEntropyLoss()
     final_feat_dim = foundation_model.final_feat_dim
-    fc = FC(final_feat_dim, args.n_way).to(DEVICE)
-    state_dict = deepcopy(fc.state_dict())  # Save initial state, mutable?
-    del fc
+    adapter = ADAPTERS[args.adapter](final_feat_dim, args.n_way).to(DEVICE)
+    state_dict = deepcopy(adapter.state_dict())  # Save initial state, mutable?
+    del adapter
 
     psg = PseudoSampleGenerator(args.n_way, args.n_support, args.n_pseudo)
 
@@ -119,9 +121,9 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
         # Train on support set
 
         # Each episode, we need to reinitialize the model
-        fc = FC(final_feat_dim, args.n_way).to(DEVICE)
-        fc.load_state_dict(state_dict)
-        optimizer = torch.optim.Adam(fc.parameters(), lr=args.lr)
+        adapter = ADAPTERS[args.adapter](final_feat_dim, args.n_way).to(DEVICE)
+        adapter.load_state_dict(state_dict)
+        optimizer = torch.optim.Adam(adapter.parameters(), lr=args.lr)
 
         pdb.set_trace(header="Model reinitialized")
 
@@ -137,7 +139,7 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
             support_features = foundation_model(
                 aug_support.view(n_way * n_aug, *aug_support.shape[2:])
             )
-            support_scores = fc(support_features.float())
+            support_scores = adapter(support_features.float())
             # print(f"support_scores: {support_scores.shape}\n{support_scores}")
             # y: (n_way) -> (n_way, n_support) -> (n_way * n_support)
             # Use local label ids for backprop
@@ -183,7 +185,7 @@ def meta_test(foundation_model: nn.Module, datamgr, args: argparse.Namespace):
             query_features = foundation_model(
                 x_query.view(n_way * n_query, *x_query.shape[2:])
             )
-            query_scores = fc(query_features.float())
+            query_scores = adapter(query_features.float())
 
             # raw_preds are indices of selected subset of classes
             raw_preds = nn.functional.softmax(query_scores, dim=-1).argmax(-1)
