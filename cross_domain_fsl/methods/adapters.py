@@ -1,5 +1,7 @@
 import torch.nn as nn
 
+# TODO: Create Base class and interface
+
 
 class FC(nn.Module):
     """Fully connected layer for fine-tuning."""
