@@ -1,0 +1,47 @@
+
+The following have been reloaded with a version change:
+  1) cuda/11.8.0 => cuda/11.1.1
+
+
+The following have been reloaded with a version change:
+  1) cuda/11.1.1 => cuda/11.8.0
+
+163819-20240625
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 215.45it/s]
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 143.74it/s]
+Namespace(dataset='ISIC', foundation_model='Vim', vision_variant='vim_tiny', n_support=5, n_query=16, n_way=5, n_episode=1000, num_workers=8)
+self.transform:  Compose(
+    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=warn)
+    ToTensor()
+    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
+)
+transform:  Compose(
+    Resize(size=(224, 224), interpolation=bilinear, max_size=None, antialias=warn)
+    ToTensor()
+    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
+)
+Traceback (most recent call last):
+  File "/cluster/home/jamliu/code/cross-domain-fsl/cross_domain_fsl/baselines/metatest_foundation_protonet.py", line 156, in <module>
+    main(args)
+  File "/cluster/home/jamliu/code/cross-domain-fsl/cross_domain_fsl/baselines/metatest_foundation_protonet.py", line 151, in main
+    acc_mean, acc_std = meta_test(protonet, datamgr)
+  File "/cluster/home/jamliu/code/cross-domain-fsl/cross_domain_fsl/baselines/metatest_foundation_protonet.py", line 61, in meta_test
+    test_dataloader = datamgr.get_data_loader(aug=False)
+  File "/cluster/home/jamliu/code/cross-domain-fsl/cross_domain_fsl/data/ISIC_few_shot.py", line 270, in get_data_loader
+    dataset = SetDataset(self.batch_size, transform)
+  File "/cluster/home/jamliu/code/cross-domain-fsl/cross_domain_fsl/data/ISIC_few_shot.py", line 113, in __init__
+    d = CustomDatasetFromImages()
+  File "/cluster/home/jamliu/code/cross-domain-fsl/cross_domain_fsl/data/ISIC_few_shot.py", line 46, in __init__
+    self.data_info = pd.read_csv(csv_path, skiprows=[0], header=None)
+  File "/cluster/home/jamliu/virtualenvs/cd_fsl/lib64/python3.10/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/cluster/home/jamliu/virtualenvs/cd_fsl/lib64/python3.10/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/cluster/home/jamliu/virtualenvs/cd_fsl/lib64/python3.10/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/cluster/home/jamliu/virtualenvs/cd_fsl/lib64/python3.10/site-packages/pandas/io/parsers/readers.py", line 1705, in _make_engine
+    self.handles = get_handle(
+  File "/cluster/home/jamliu/virtualenvs/cd_fsl/lib64/python3.10/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/cluster/work/cvl/jamliu/data/ISIC2018/ISIC2018_Task3_Training_GroundTruth/ISIC2018_Task3_Training_GroundTruth.csv'
+163919-20240625
