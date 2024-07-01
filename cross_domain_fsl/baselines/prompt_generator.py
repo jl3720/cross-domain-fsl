@@ -5,13 +5,28 @@ import torch.nn.functional as F
 import torch.optim as optim
 import pickle as pkl
 import torch.nn as nn
-import os
+from pathlib import Path
 from cross_domain_fsl.methods.prompt_learner import PromptLearner
 from cross_domain_fsl.methods.text_encoder import TextEncoder
 
 from cross_domain_fsl.utils.configs import CLIP_DIM_MAPPING, CLASS_NAMES_MAPPING
 
 device = "cuda"
+
+PROMPT_LEARNER_CHKP_DIR = Path("./pth/prompt_learner")
+print(
+    f"Prompt learner checkpoint directory: {PROMPT_LEARNER_CHKP_DIR}, {PROMPT_LEARNER_CHKP_DIR.exists()}"
+)
+
+if not PROMPT_LEARNER_CHKP_DIR.exists():
+    PROMPT_LEARNER_CHKP_DIR.mkdir(parents=True, exist_ok=True)
+
+STYLE_VECS_OUT_DIR = Path("./pth/style_vecs_out")
+print(
+    f"Style vectors output directory: {STYLE_VECS_OUT_DIR}, {STYLE_VECS_OUT_DIR.exists()}"
+)
+if not STYLE_VECS_OUT_DIR.exists():
+    STYLE_VECS_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def style_diversity_loss(style_feature, previous_style_features):
@@ -150,11 +165,10 @@ def train(args: argparse.Namespace):  # return
         style_content_feas_out.append((style_content_vec, tokenized_prompts_content))
         torch.save(
             prompt_learner.state_dict(),
-            "./pth/prompt_learner/{}_{}th_style.pth".format(
-                clip_model_name.replace("/", "_"), str(i)
-            ),
+            PROMPT_LEARNER_CHKP_DIR
+            / "{}_{}th_style.pth".format(clip_model_name.replace("/", "_"), str(i)),
         )
-    style_vecs_path = "./pth/style_vecs_out/{}_{}_style_vecs_out".format(
+    style_vecs_path = STYLE_VECS_OUT_DIR / "{}_{}_style_vecs_out".format(
         clip_model_name.replace("/", "_"), dataset_name
     )
     pkl.dump(style_content_feas_out, open(style_vecs_path, "wb"))

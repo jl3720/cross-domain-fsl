@@ -16,3 +16,5 @@ Vim/causal-conv1d/causal_conv1d_cuda.cpython-3*-x86_64-linux-gnu.so
 Vim/mamba/build/
 Vim/mamba/mamba_ssm.egg-info/
 Vim/mamba/selective_scan_cuda.cpython-3*-x86_64-linux-gnu.so
+
+pth/
