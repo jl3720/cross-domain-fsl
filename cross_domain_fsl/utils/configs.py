@@ -1,5 +1,154 @@
 CLIP_DIM_MAPPING = {"ViT-B/32": 512, "ViT-B/16": 512, "ViT-L/14": 768, "RN50": 1024}
+
+EUROSAT_CLASSES = [
+    "AnnualCrop",
+    "Forest",
+    "HerbaceousVegetation",
+    "Highway",
+    "Industrial",
+    "Pasture",
+    "PermanentCrop",
+    "Residential",
+    "River",
+    "SeaLake",
+]
+
+EUROSAT_PROMPTS = (
+    [  # TODO: Engineer to allow for "A S* style <satellite photo of <Annual Crop>>"
+        "Annual Crop",
+        "Forest",
+        "Herbaceous Vegetation",
+        "Highway",
+        "Industrial",
+        "Pasture",
+        "Permanent Crop",
+        "Residential",
+        "River",
+        "Sea Lake",
+    ]
+)
+
+CROPDISEASE_CLASSES = [
+    "Apple___Apple_scab",
+    "Apple___Black_rot",
+    "Apple___Cedar_apple_rust",
+    "Apple___healthy",
+    "Blueberry___healthy",
+    "Cherry_(including_sour)___Powdery_mildew",
+    "Cherry_(including_sour)___healthy",
+    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+    "Corn_(maize)___Common_rust_",
+    "Corn_(maize)___Northern_Leaf_Blight",
+    "Corn_(maize)___healthy",
+    "Grape___Black_rot",
+    "Grape___Esca_(Black_Measles)",
+    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+    "Grape___healthy",
+    "Orange___Haunglongbing_(Citrus_greening)",
+    "Peach___Bacterial_spot",
+    "Peach___healthy",
+    "Pepper,_bell___Bacterial_spot",
+    "Pepper,_bell___healthy",
+    "Potato___Early_blight",
+    "Potato___Late_blight",
+    "Potato___healthy",
+    "Raspberry___healthy",
+    "Soybean___healthy",
+    "Squash___Powdery_mildew",
+    "Strawberry___Leaf_scorch",
+    "Strawberry___healthy",
+    "Tomato___Bacterial_spot",
+    "Tomato___Early_blight",
+    "Tomato___Late_blight",
+    "Tomato___Leaf_Mold",
+    "Tomato___Septoria_leaf_spot",
+    "Tomato___Spider_mites Two-spotted_spider_mite",
+    "Tomato___Target_Spot",
+    "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+    "Tomato___Tomato_mosaic_virus",
+    "Tomato___healthy",
+]
+CROPDISEASE_PROMPTS = [
+    "Apple with Apple Scab",
+    "Apple with Black Rot",
+    "Apple with Cedar Apple Rust",
+    "Healthy Apple",
+    "Healthy Blueberry",
+    "Cherry with Powdery Mildew",
+    "Healthy Cherry",
+    "Corn with Cercospora Leaf Spot / Gray Leaf Spot",
+    "Corn with Common Rust",
+    "Corn with Northern Leaf Blight",
+    "Healthy Corn",
+    "Grape with Black Rot",
+    "Grape with Esca (Black Measles)",
+    "Grape with Leaf Blight (Isariopsis Leaf Spot)",
+    "Healthy Grape",
+    "Orange with Huanglongbing (Citrus Greening)",
+    "Peach with Bacterial Spot",
+    "Healthy Peach",
+    "Pepper with Bacterial Spot",
+    "Healthy Pepper",
+    "Potato with Early Blight",
+    "Potato with Late Blight",
+    "Healthy Potato",
+    "Healthy Raspberry",
+    "Healthy Soybean",
+    "Squash with Powdery Mildew",
+    "Strawberry with Leaf Scorch",
+    "Healthy Strawberry",
+    "Tomato with Bacterial Spot",
+    "Tomato with Early Blight",
+    "Tomato with Late Blight",
+    "Tomato with Leaf Mold",
+    "Tomato with Septoria Leaf Spot",
+    "Tomato with Spider Mites (Two-Spotted Spider Mite)",
+    "Tomato with Target Spot",
+    "Tomato with Tomato Yellow Leaf Curl Virus",
+    "Tomato with Tomato Mosaic Virus",
+    "Healthy Tomato",
+]
+
+ISIC_CLASSES = ["MEL", "NV", "BCC", "AKIEC", "BKL", "DF", "VASC"]
+ISIC_PROMPTS = [  # "... an image of skin with <Melanoma>"
+    "Melanoma",
+    "Melanocytic Nevi",
+    "Basal Cell Carcinoma",
+    "Actinic Keratosis",
+    "Benign Keratosis",
+    "Dermatofibroma",
+    "Vascular Lesion",
+]
+
+CHESTX_CLASSES = [
+    "Atelectasis",
+    "Cardiomegaly",
+    "Effusion",
+    "Infiltration",
+    "Mass",
+    "Nodule",
+    "Pneumonia",
+    "Pneumothorax",
+]
+CHESTX_PROMPTS = [
+    "Atelectasis",  # "... an X-ray chest scan of lungs with <>"
+    "Cardiomegaly",
+    "Effusion",
+    "Infiltration",
+    "a Mass",
+    "a Nodule",
+    "Pneumonia",
+    "Pneumothorax",
+]
+
 CLASS_NAMES_MAPPING = {
+    "EuroSAT": dict(zip(EUROSAT_CLASSES, EUROSAT_PROMPTS)),
+    "CropDisease": dict(zip(CROPDISEASE_CLASSES, CROPDISEASE_PROMPTS)),
+    "ISIC": dict(zip(ISIC_CLASSES, ISIC_PROMPTS)),
+    "CheX": dict(zip(CHESTX_CLASSES, CHESTX_PROMPTS)),
+}
+
+DG_CLASS_NAMES_MAPPING = {
     "PACS": ["dog", "elephant", "giraffe", "guitar", "horse", "house", "person"],
     "OfficeHome": [
         "Drill",
@@ -423,7 +572,7 @@ CLASS_NAMES_MAPPING = {
 # Loops through the list stored in values below.
 
 # Use full domain word to create prompts
-DOMAINS_FULL = {
+DG_DOMAINS_FULL = {
     "PACS": ["photo", "art", "cartoon", "sketch"],
     "OfficeHome": ["art", "clipart", "product", "real world"],
     # "VLCS": ["clipart", "infograph", "sketch", "painting"],
@@ -456,7 +605,7 @@ DOMAINS_FULL = {
 # for dataset, full_domains in DOMAINS_FULL.items():
 #     DOMAINS_TO_ABBREV[dataset] = {full_domain: abbreviated_domain for full_domain, abbreviated_domain in zip(full_domains, DOMAINS[dataset])}
 # print(DOMAINS_TO_ABBREV)
-DOMAINS_TO_ABBREV = {
+DG_DOMAINS_TO_ABBREV = {
     "PACS": {"photo": "P", "art": "A", "cartoon": "C", "sketch": "S"},
     "OfficeHome": {"art": "Ar", "clipart": "Cl", "product": "Pr", "real world": "Rw"},
     # "VLCS": {"clipart": "C", "infograph": "L", "sketch": "S", "painting": "V"},
@@ -501,9 +650,9 @@ def gen_domain_int_enc() -> dict:
         DOMAINS[<dataset>][<domain>]
     """
     domain_encodings = {}
-    for dataset in DOMAINS_FULL.keys():
+    for dataset in DG_DOMAINS_FULL.keys():
         tmp_domains = {}
-        for i, domain in enumerate(DOMAINS_FULL[dataset]):
+        for i, domain in enumerate(DG_DOMAINS_FULL[dataset]):
             tmp_domains[domain] = i  # integer encode domains in order
 
         domain_encodings[dataset] = tmp_domains
@@ -511,5 +660,5 @@ def gen_domain_int_enc() -> dict:
     return domain_encodings
 
 
-DOMAIN_ENCODINGS = gen_domain_int_enc()
+DG_DOMAIN_ENCODINGS = gen_domain_int_enc()
 # print(DOMAIN_ENCODINGS)
