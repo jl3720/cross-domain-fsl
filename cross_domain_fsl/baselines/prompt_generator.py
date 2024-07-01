@@ -120,7 +120,7 @@ def train(args: argparse.Namespace):  # return
     # class_names = sorted(os.listdir('/sdc1/fuyuqian/datasets/PACS/cartoon/')) # PACS
     # class_names = sorted(os.listdir('/sdc1/fuyuqian/datasets/OfficeHome/Art/'))  #officehome
 
-    class_names = CLASS_NAMES_MAPPING[dataset_name]
+    class_names = CLASS_NAMES_MAPPING[dataset_name].values()
     print("class_names:", class_names, len(class_names))
     class_tokens = clip.tokenize(class_names).cuda()
     with torch.no_grad():
@@ -172,7 +172,7 @@ def train(args: argparse.Namespace):  # return
         clip_model_name.replace("/", "_"), dataset_name
     )
     pkl.dump(style_content_feas_out, open(style_vecs_path, "wb"))
-    print(f"Style vectors saved to {style_vecs_path}.")
+    print(f"Style-content vectors saved to {style_vecs_path}.")
     return
 
 
@@ -184,7 +184,7 @@ if __name__ == "__main__":
         default="RN50",
         help="Valid options (case sensitive): RN50, RN101, RN50x4, ViT-B/32, ViT-B/16, ViT-L/14",
     )
-    parser.add_argument("--dataset", type=str, default="PACS")
+    parser.add_argument("--dataset", type=str, default="EuroSAT")
 
     args = parser.parse_args()
     print("##################################################")
